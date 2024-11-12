@@ -11,7 +11,6 @@ interface Product {
 
 const Home = () => {
 
-    const [ prenom, setPrenom ] = useState<string>('')
     const [ data, setData ] = useState<[]>()
 
     useEffect(() => {
@@ -27,9 +26,9 @@ const Home = () => {
     console.log(data);
     return (
         <>
-            <div>this is my homepage</div>
-            <div>je suis {prenom}</div>
-            <Header setPrenom={setPrenom} />
+
+            <div className="grid gap-2 grid-cols-4 p-4">
+
             {data?.map((product: Product) => (
                 <Card 
                 key={product.id}
@@ -38,6 +37,7 @@ const Home = () => {
                 image={product.image_links?.[0]} />
                 
             ))}
+            </div>
             
         </>
 

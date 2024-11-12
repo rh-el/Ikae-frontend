@@ -1,4 +1,3 @@
-import React from "react";
 
 const Login = () => {
 
@@ -6,7 +5,6 @@ const Login = () => {
 
     return (
         <>
-        <div>login page</div>
     </>
     )
 }
