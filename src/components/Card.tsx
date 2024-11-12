@@ -13,7 +13,7 @@ const Card = ({ image, product_name, price }: Card) => {
             <img src={image} alt="" />
             <h2>{product_name}</h2>
             <p>Prix: {price}</p>
-            <button>Ajouter au panier</button>
+            <button className="focus:border-none">Ajouter au panier</button>
         </div>
 
     )
