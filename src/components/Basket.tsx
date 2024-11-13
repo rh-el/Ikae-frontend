@@ -27,10 +27,10 @@ function Basket () {
     //     return totalPrice
     // }
 
-    function sumTotalPrice(...nums : any) {
-        let sum = nums.reduce((num1 : number, num2: number) => num1 + num2)
-        return sum
-    }
+    // function sumTotalPrice(...nums : any) {
+    //     let sum = nums.reduce((num1 : number, num2: number) => num1 + num2)
+    //     return sum
+    // }
 
     // let totalPrice = sumTotalPrice()
 
@@ -74,7 +74,7 @@ function Basket () {
                         {/* <p>Prix total : {productList.map((product) => 
                             totalPrice += parseInt(product.price)
                         )}€</p> */}
-                        <p>Prix total : {sumTotalPrice()}€</p>
+                        <p>Prix total : {}€</p>
 
                 </div>
             </div>
