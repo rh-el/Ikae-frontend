@@ -4,8 +4,12 @@ import Login from './components/Login'
 import Home from './components/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Product from './components/Product'
 
-const router = createBrowserRouter([
+
+function App() {
+
+  const router = createBrowserRouter([
   {
       path: "/",
       element: <Home />
@@ -13,10 +17,12 @@ const router = createBrowserRouter([
   {
       path: "/login",
       element: <Login />
+  },
+  {
+      path: "/product/:id",
+      element: <Product />
   }
 ])
-
-function App() {
 
 
   
