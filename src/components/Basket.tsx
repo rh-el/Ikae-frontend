@@ -5,6 +5,7 @@ function Basket () {
     // const [ basketContent, setBasketContent ] = useState()
     
     const productList = []
+    let totalPrice:GLfloat = 0;
 
     for (const id in localStorage) {
         if (!isNaN(parseInt(id))) {
@@ -13,6 +14,12 @@ function Basket () {
             console.log("🌈", typeof(localStorage[id]));
         }
     }
+
+    for (let i = 0; i < productList.length; i ++){
+        totalPrice += productList[i].price;
+            console.log(totalPrice)
+    }
+    console.log(totalPrice)
     
     // function removeItem(productId : string) {
     //     localStorage.removeItem(productId)
@@ -20,7 +27,7 @@ function Basket () {
     //     window.location.reload()
     // }
 
-    let totalPrice = 0
+
 
     // function sumTotalPrice() {
     //     const totalPrice = 1+1
@@ -74,7 +81,7 @@ function Basket () {
                         {/* <p>Prix total : {productList.map((product) => 
                             totalPrice += parseInt(product.price)
                         )}€</p> */}
-                        <p>Prix total : {}€</p>
+                        <p>Prix total : {totalPrice}€</p>
 
                 </div>
             </div>
