@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Product from "./components/Product";
 import Basket from "./components/Basket";
+import Dashboard from "./components/Dashboard";
 import { useState } from "react";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/basket" element={<Basket />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
           <Footer />
       </BrowserRouter>
