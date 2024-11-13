@@ -37,7 +37,7 @@ const Home = ({ filter }: Home) => {
           )
           .map((product: Product) => (
             <Card
-              key={product.id}
+              id={product.id}
               product_name={product.product_name}
               price={product.price}
               image={product.image_links?.[0]}
