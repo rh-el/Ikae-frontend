@@ -46,7 +46,7 @@ function Product () {
 
             <div>
                 <h2 className="text-4xl">{productData?.[0].product_name}</h2>
-                <p>{productData?.[0].price}€</p>
+                <p>{productData?.[0].price.toFixed(2)}€</p>
                 <p>{productData?.[0].description}</p>
                 <p>{productData?.[0].type}</p>
                 <p>{productData?.[0].material}</p>
