@@ -8,6 +8,7 @@ import Product from "./components/Product";
 import Basket from "./components/Basket";
 import Dashboard from "./components/Dashboard";
 import { useState } from "react";
+import DashboardProduct from "./components/DashboardProduct";
 
 function App() {
   const [filter, setFilter] = useState<string>("");
@@ -22,6 +23,7 @@ function App() {
           <Route path="/product/:id" element={<Product />} />
           <Route path="/basket" element={<Basket />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/product/:id" element={<DashboardProduct />} />
         </Routes>
           <Footer />
       </BrowserRouter>

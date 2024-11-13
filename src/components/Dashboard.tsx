@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Product {
     id: number;
@@ -36,10 +37,7 @@ const Dashboard = () => {
                         <h3>{product.product_name}</h3>
                         <p>{product.price}€</p>
                     </div>
-                    <button className="absolute right-4 border h-1/2 p-4 rounded-xl text-center flex items-center ">
-                        <p>Modifier produit</p>
-                    </button>
-
+                    <Link className="absolute right-4 border h-1/2 p-4 rounded-xl text-center flex items-center" to={`./product/${product.id}`}>Modifier produit</Link>
                 </div>
             ))}
         </div>
