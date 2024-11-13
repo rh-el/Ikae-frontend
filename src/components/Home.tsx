@@ -4,7 +4,7 @@ import Card from "./Card";
 interface Product {
   id: number;
   product_name: string;
-  price: number;
+  price: GLfloat;
   image_links: string[];
 }
 

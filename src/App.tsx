@@ -21,9 +21,7 @@ function App() {
           <Route path="/product/:id" element={<Product />} />
           <Route path="/basket" element={<Basket />} />
         </Routes>
-        <div className="relative min-h-svh">
           <Footer />
-        </div>
       </BrowserRouter>
     </>
   );

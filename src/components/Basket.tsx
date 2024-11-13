@@ -45,7 +45,7 @@ function Basket () {
                                 <img src={product.image} alt="" className="max-w-32"/>
                                 <div>
                                     <h3>{product.product_name}</h3>
-                                    <p>{product.price}€</p>
+                                    <p>{product.price.toFixed(2)}€</p>
                                     {/* <button onClick={() => removeItem(product.id)}>🗑️ Supprimer</button> */}
                                      <button onClick={() => { 
                                         localStorage.removeItem(product.id)
@@ -66,7 +66,7 @@ function Basket () {
                             <div key={product.id} className="flex gap-4" >
                                 <div>
                                     <h3>{product.product_name}</h3>
-                                    <p>{product.price}€</p>
+                                    <p>{product.price.toFixed(2)}€</p>
                                 </div>
                             </div>
                             )}

@@ -34,7 +34,7 @@ const Card = ({ id, image, product_name, price }: Card) => {
       <Link to={`./product/${id}`}>
         <img src={image} alt="" />
         <h2>{product_name}</h2>
-        <p>{price}€</p>
+        <p>{price.toFixed(2)}€</p>
       </Link>
       <button onClick={handleClickFromCard}>Ajouter au panier</button>
     </div>
