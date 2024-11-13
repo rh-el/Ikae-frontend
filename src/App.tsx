@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Product from './components/Product'
+import Basket from './components/Basket'
 
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
   {
       path: "/product/:id",
       element: <Product />
+  },
+  {
+      path: "/basket",
+      element: <Basket />
   }
 ])
 
