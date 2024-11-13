@@ -1,5 +1,7 @@
 function Basket () {
     
+    localStorage.getItem("")
+
     return (
         <>
         </>

@@ -1,6 +1,5 @@
 import { createBrowserHistory } from 'history'
 import { useEffect, useState } from 'react'
-import AddToCart from './AddToCart';
 
 function Product () {
     const history = createBrowserHistory(); 
@@ -22,8 +21,15 @@ function Product () {
 
     console.log(productData)
 
-    function handleClick () {
-        localStorage.setItem(productData[0].id, JSON.stringify(productData[0]));
+    const formattedProductData = {
+        id: productData?.[0].id, 
+        image: productData?.[0].image_links[0], 
+        product_name: productData?.[0].product_name, 
+        price: productData?.[0].price,
+    }
+
+    function handleClickFromProduct () {
+        localStorage.setItem(productData[0].id, JSON.stringify(formattedProductData));
         console.log(localStorage);
     }
 
@@ -45,7 +51,7 @@ function Product () {
                 <p>{productData?.[0].type}</p>
                 <p>{productData?.[0].material}</p>
                 <p>{productData?.[0].state}</p>
-                <AddToCart handleClick={handleClick}/>
+                <button onClick={handleClickFromProduct}>Ajouter au panier</button>
             </div>
         </div>
 
