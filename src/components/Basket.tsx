@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Basket () {
 
@@ -27,8 +27,6 @@ function Basket () {
     //     window.location.reload()
     // }
 
-
-
     // function sumTotalPrice() {
     //     const totalPrice = 1+1
     //     return totalPrice
@@ -49,10 +47,12 @@ function Basket () {
                         {productList.map((product) => {
                             return (
                             <div key={product.id} className="flex gap-4" >
+                                <Link to={`../product/${product.id}`}>
                                 <img src={product.image} alt="" className="max-w-32"/>
+                                </Link>
                                 <div>
                                     <h3>{product.product_name}</h3>
-                                    <p>{product.price.toFixed(2)}€</p>
+                                    <p>{product.price.toFixed(2).replace(".", ",")}€</p>
                                     {/* <button onClick={() => removeItem(product.id)}>🗑️ Supprimer</button> */}
                                      <button onClick={() => { 
                                         localStorage.removeItem(product.id)
@@ -73,15 +73,12 @@ function Basket () {
                             <div key={product.id} className="flex gap-4" >
                                 <div>
                                     <h3>{product.product_name}</h3>
-                                    <p>{product.price.toFixed(2)}€</p>
+                                    <p>{product.price.toFixed(2).replace(".", ",")}€</p>
                                 </div>
                             </div>
                             )}
                         )}
-                        {/* <p>Prix total : {productList.map((product) => 
-                            totalPrice += parseInt(product.price)
-                        )}€</p> */}
-                        <p>Prix total : {totalPrice}€</p>
+                        <p>Prix total : {totalPrice.toFixed(2).replace(".", ",")}€</p>
 
                 </div>
             </div>

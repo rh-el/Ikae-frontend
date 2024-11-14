@@ -5,6 +5,7 @@ function Product () {
     const history = createBrowserHistory(); 
     const splitPathname = history.location.pathname.split('/')
     const productId = splitPathname[2]
+    console.log("🍐", history)
     console.log(productId)
 
     const [ productData, setProductData ] = useState<any>()
@@ -46,7 +47,7 @@ function Product () {
 
             <div>
                 <h2 className="text-4xl">{productData?.[0].product_name}</h2>
-                <p>{productData?.[0].price.toFixed(2)}€</p>
+                <p>{productData?.[0].price.toFixed(2).replace(".", ",")}€</p>
                 <p>{productData?.[0].description}</p>
                 <p>{productData?.[0].type}</p>
                 <p>{productData?.[0].material}</p>
