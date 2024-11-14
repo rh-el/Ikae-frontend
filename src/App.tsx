@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
+import Register from "./components/Register";
 import Home from "./components/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -20,12 +21,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Home filter={filter} />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/basket" element={<Basket />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/product/:id" element={<DashboardProduct />} />
         </Routes>
-          <Footer />
+        <Footer />
       </BrowserRouter>
     </>
   );
