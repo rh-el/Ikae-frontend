@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 const saltRounds = 10;
 const myPlaintextPassword = 's0/\/\P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
@@ -17,6 +17,11 @@ function generate() {
     
 };
 
+const salt = bcrypt.genSaltSync(10);
+const hash = bcrypt.hashSync("azertyuiop", salt);
+console.log(hash);
+
+
 
 function check() {
     bcrypt.compare(myPlaintextPassword, cryptedPassword, (err, result) => {
@@ -26,9 +31,9 @@ function check() {
 });
 }
 
-generate()
-setTimeout(() => {
-    check()}, 2000);
+// generate()
+// setTimeout(() => {
+//     check()}, 2000);
 
 
 
