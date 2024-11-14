@@ -1,9 +1,13 @@
 import { useForm } from "react-hook-form";
 import bcrypt from "bcryptjs";
+import Cookies from 'js-cookie';
 
 // import { useEffect } from "react";
 
 const Login = () => {
+
+  
+
   const getPasswordFromDb = async (email: string) => {
     const request = await fetch(`http://192.168.5.181:3000/login`, {
       method: "GET",
@@ -12,27 +16,45 @@ const Login = () => {
       },
     });
     const cryptedPassword = await request.json();
-    // console.log("crypted password from db: ", cryptedPassword[0].password);
     return cryptedPassword[0].password;
-    // setDashboardData(fetchData)
   };
 
   async function comparePassword(
     userPassword: string,
-    cryptedPasswordFromDb: string
-  ) {
-    console.log(userPassword, cryptedPasswordFromDb);
-    bcrypt.compare(userPassword, cryptedPasswordFromDb, (err, result) => {
-      console.log("result of compare: ", result);
-      return result;
+    cryptedPasswordFromDb: string,
+
+  ): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(userPassword, cryptedPasswordFromDb, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      })
     });
   }
+
+  async function getToken(email: string) {
+    const request = await fetch(`http://192.168.5.181:3000/token`, {
+      method: "GET",
+      headers: {
+        email: email,
+      },
+    });
+    const token = await request.json();
+    return token;
+  }
+
   // fetch à passer en useEffect?
   async function execOrder(data: any) {
     const dbPassword = await getPasswordFromDb(data.email);
     console.log(dbPassword);
     const result = await comparePassword(data.password, dbPassword);
-    // console.log(result);
+    if (result) {
+      const token = await getToken(data.email)
+      Cookies.set('token', token, { secure: true });
+    }
   }
 
   const { register, handleSubmit } = useForm();
