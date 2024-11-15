@@ -137,4 +137,3 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
 
 export default Basket;
 
-{/* // "{\"id\":14,\"image\":\"http://192.168.5.181:3000/img/lampe-acier-gris.webp\",\"product_name\":\"Lampe en acier industrielle\",\"price\":75}" */}
