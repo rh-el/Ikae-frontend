@@ -4,7 +4,7 @@ function Basket () {
 
     // const [ basketContent, setBasketContent ] = useState()
     
-    const productList = []
+    const productList:any = []
     let totalPrice:GLfloat = 0;
 
     for (const id in localStorage) {
@@ -26,25 +26,32 @@ function Basket () {
     //     console.log("📍", productId)
     //     window.location.reload()
     // }
+    
+    const completeOrder = async () => {
+        const productIds = productList.map((product: any) => {
+            return product.id
+        })
+        console.log("🍑", productIds);
+        
+        const newOrder = await fetch(`http://192.168.5.181:3000/order`, {
+            method: "POST",
+            body: JSON.stringify({
+                user_id : null,
+                total_price : totalPrice,
+                product_id : productIds,
+            })
+        })
 
-    // function sumTotalPrice() {
-    //     const totalPrice = 1+1
-    //     return totalPrice
-    // }
-
-    // function sumTotalPrice(...nums : any) {
-    //     let sum = nums.reduce((num1 : number, num2: number) => num1 + num2)
-    //     return sum
-    // }
-
-    // let totalPrice = sumTotalPrice()
+        await newOrder.json()
+    }
+    
 
     return (
         <div className="flex justify-between p-10">
             <div>
                 <h2 className="text-3xl mb-5">Panier</h2> 
                 <div className="flex flex-col gap-5">
-                        {productList.map((product) => {
+                        {productList.map((product: any) => {
                             return (
                             <div key={product.id} className="flex gap-4" >
                                 <Link to={`../product/${product.id}`}>
@@ -64,22 +71,26 @@ function Basket () {
                         )}
                 </div>
             </div>
-            <div>
-                <div className="flex flex-col gap-5 border border-grey p-6">
-                        <h2>Résumé de votre commande</h2>
+            <div className="w-1/3">
+                <div className="flex flex-col gap-5 border border-grey p-6 w-full">
+                        <h2 className="font-bold">Résumé de votre commande</h2>
 
-                        {productList.map((product) => {
+                        {productList.map((product: any) => {
                             return (
                             <div key={product.id} className="flex gap-4" >
-                                <div>
+                                <div className="flex justify-between w-full">
                                     <h3>{product.product_name}</h3>
                                     <p>{product.price.toFixed(2).replace(".", ",")}€</p>
                                 </div>
                             </div>
                             )}
                         )}
-                        <p>Prix total : {totalPrice.toFixed(2).replace(".", ",")}€</p>
-
+                        <hr className="my-2 h-0.5 border-t-0 bg-black" />
+                        <div className="flex justify-between font-bold">
+                            <p>Prix total</p>
+                            <p>{totalPrice.toFixed(2).replace(".", ",")}€</p>
+                        </div>
+                        <button onClick={completeOrder} className="p-2 w-full border border-black bg-black text-white duration-150">Commander</button>
                 </div>
             </div>
         </div>
