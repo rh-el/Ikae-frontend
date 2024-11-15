@@ -37,23 +37,27 @@ const Login = () => {
 
   async function getToken(email: string) {
     const request = await fetch(`http://192.168.5.181:3000/token`, {
-      method: "GET",
       headers: {
-        email: email,
+        'email': email,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
     });
-    const token = await request.json();
+    const token = await request.json();    
     return token;
   }
 
   // fetch à passer en useEffect?
   async function execOrder(data: any) {
     const dbPassword = await getPasswordFromDb(data.email);
-    console.log(dbPassword);
-    const result = await comparePassword(data.password, dbPassword);
+    // console.log(dbPassword);
+    const result = await comparePassword(data.password, dbPassword);    
     if (result) {
       const token = await getToken(data.email)
-      Cookies.set('token', token, { secure: true });
+      await Cookies.set('token', token, { secure: true });
+      
+    } else {
+      alert('wrong password')
     }
   }
 
