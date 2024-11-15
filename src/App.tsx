@@ -10,10 +10,12 @@ import Basket from "./components/Basket";
 import Dashboard from "./components/Dashboard";
 import { useState } from "react";
 import DashboardProduct from "./components/DashboardProduct";
+import OrderConfirmation from "./components/OrderConfirmation";
 
 function App() {
   const [ filter, setFilter ] = useState<string>("");
   const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
+  const [ orderData, setOrderData ] = useState<object>({})
 
   console.log("state is:", isLoggedIn);
   
@@ -26,9 +28,10 @@ function App() {
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/basket" element={<Basket />} />
+          <Route path="/basket" element={<Basket setOrderData={setOrderData} />} />
           <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/dashboard/product/:id" element={<DashboardProduct />} />
+          <Route path="/confirmation" element={<OrderConfirmation orderData={orderData} />} />
         </Routes>
         <Footer />
       </BrowserRouter>

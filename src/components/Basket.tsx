@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 
 
-function Basket () {
+function Basket ({ setOrderData } : any) {
 
     // const [ basketContent, setBasketContent ] = useState()
-    
+    const navigate = useNavigate()
     const productList:any = []
     let totalPrice:GLfloat = 0;
 
@@ -40,7 +41,8 @@ function Basket () {
               },       
         })
         const data = await request.json()
-        console.log(data);
+        setOrderData(data)
+        navigate("/confirmation");
     }
 
     const completeOrder = async () => {
