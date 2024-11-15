@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import bcrypt from "bcryptjs";
 import Cookies from 'js-cookie';
+import {useNavigate} from "react-router-dom";
 
 // import { useEffect } from "react";
 
 const Login = () => {
 
-  
+  const navigate = useNavigate();
 
   const getPasswordFromDb = async (email: string) => {
     const request = await fetch(`http://192.168.5.181:3000/login`, {
@@ -53,12 +54,14 @@ const Login = () => {
     // console.log(dbPassword);
     const result = await comparePassword(data.password, dbPassword);    
     if (result) {
+      console.log("JE SUIS DANS LE IF RESULT")
       const token = await getToken(data.email)
       await Cookies.set('token', token, { secure: true });
       
     } else {
       alert('wrong password')
     }
+    navigate(-1);
   }
 
   const { register, handleSubmit } = useForm();

@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import bcrypt from "bcryptjs";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const hashPassword = (password: string) => {
   const salt = bcrypt.genSaltSync(10);
@@ -23,16 +25,23 @@ const registerInDb = async (data: any, password: string) => {
   });
 };
 
-const sendRegistrationForm = async (data: any) => {
+const sendRegistrationForm = async (data: any, setter: any) => {
   const hashedPassword = hashPassword(data.password);
   await registerInDb(data, hashedPassword);
+  setter(true);
 };
 
+
+
 const Register = () => {
+  const navigate = useNavigate();
+
+  const [registrationStatus, setRegistrationStatus] = useState<boolean>(false);
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data: object) => sendRegistrationForm(data);
+  const onSubmit = (data: object) => sendRegistrationForm(data, setRegistrationStatus);
   return (
     <>
+    {!registrationStatus ? 
       <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col items-center p-10">
           <div className="flex flex-col gap-4 w-3/4 pb-4">
@@ -84,6 +93,10 @@ const Register = () => {
           </a>
         </div>
       </form>
+      : <div className="flex w-full flex-col items-center p-10 gap-90">
+          <p>Félicitations ! Votre compte a bien été créé.</p>
+          <button onClick={() => navigate(-2)} className="border py-4 px-8 m-6">Retour</button>
+        </div>} 
     </>
   );
 };
