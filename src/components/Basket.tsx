@@ -42,7 +42,7 @@ function Basket () {
             return product.id
         })
         console.log("🍑", productIds);
-        const token = Cookies.get('token')
+        const token: any = Cookies.get('token')
         console.log(token);
         newOrder(productIds, token)
     }

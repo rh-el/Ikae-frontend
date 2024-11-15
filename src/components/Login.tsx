@@ -10,14 +10,14 @@ const Login = () => {
   const navigate = useNavigate();
 
   const getPasswordFromDb = async (email: string) => {
-    const request = await fetch(`http://192.168.5.181:3000/login`, {
+    const request = await fetch(`http://localhost:3000/login`, {
       method: "GET",
       headers: {
         email: email,
       },
     });
-    const cryptedPassword = await request.json();
-    return cryptedPassword[0].password;
+    const cryptedPassword = await request.json();    
+    return cryptedPassword;
   };
 
   async function comparePassword(
@@ -37,7 +37,7 @@ const Login = () => {
   }
 
   async function getToken(email: string) {
-    const request = await fetch(`http://192.168.5.181:3000/token`, {
+    const request = await fetch(`http://localhost:3000/token`, {
       headers: {
         'email': email,
         'Content-Type': 'application/json',
@@ -51,12 +51,14 @@ const Login = () => {
   // fetch à passer en useEffect?
   async function execOrder(data: any) {
     const dbPassword = await getPasswordFromDb(data.email);
-    // console.log(dbPassword);
-    const result = await comparePassword(data.password, dbPassword);    
+    const result = await comparePassword(data.password, dbPassword);  
+      
     if (result) {
       console.log("JE SUIS DANS LE IF RESULT")
       const token = await getToken(data.email)
       await Cookies.set('token', token, { secure: true });
+      console.log(Cookies.get());
+      
       
     } else {
       alert('wrong password')
