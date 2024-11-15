@@ -12,19 +12,22 @@ import { useState } from "react";
 import DashboardProduct from "./components/DashboardProduct";
 
 function App() {
-  const [filter, setFilter] = useState<string>("");
+  const [ filter, setFilter ] = useState<string>("");
+  const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
 
+  console.log("state is:", isLoggedIn);
+  
   return (
     <>
       <BrowserRouter>
-        <Header setFilter={setFilter} />
+        <Header setFilter={setFilter} isLoggedIn={isLoggedIn} />
         <Routes>
           <Route path="/" element={<Home filter={filter} />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/basket" element={<Basket />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/dashboard/product/:id" element={<DashboardProduct />} />
         </Routes>
         <Footer />

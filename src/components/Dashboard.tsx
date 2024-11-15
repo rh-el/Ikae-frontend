@@ -8,7 +8,7 @@ interface Product {
     image_links: string[];
   }
 
-const Dashboard = () => {
+const Dashboard = ( {setIsLoggedIn} : any) => {
 
     const [dashboardData, setDashboardData] = useState<[]>([])
 
@@ -25,8 +25,7 @@ const Dashboard = () => {
 
 
     return (
-        <>
-        <div className="p-10 flex flex-col gap-4">
+        <div className="p-10 flex flex-col gap-4 items-center">
             {dashboardData?.map((product: Product) => (
                 <div key={product.id} className=" relative flex w-3/4 gap-4 border items-center rounded-xl ">
                     <div className="w-24 h-24 object-contain">
@@ -40,8 +39,10 @@ const Dashboard = () => {
                     <Link className="absolute right-4 border h-1/2 p-4 rounded-xl text-center flex items-center" to={`./product/${product.id}`}>Modifier produit</Link>
                 </div>
             ))}
+            <Link to={'/login'}>
+                <button onClick={() => setIsLoggedIn(false)} className="border p-4 rounded-md bg-red-200">Déconnexion</button>
+            </Link>
         </div>
-        </>
     )
 
 }

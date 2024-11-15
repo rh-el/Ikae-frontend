@@ -77,7 +77,7 @@ function Basket () {
             </div>
             <div className="w-1/3">
                 <div className="flex flex-col gap-5 border border-grey p-6 w-full">
-                        <h2 className="font-bold">Résumé de votre commande</h2>
+                        <h2 className="font-bold">Récapitulatif de votre commande</h2>
                         {productList.map((product: any) => {
                             return (
                             <div key={product.id} className="flex gap-4" >
