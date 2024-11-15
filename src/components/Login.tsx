@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import bcrypt from "bcryptjs";
 import Cookies from 'js-cookie';
-import {useNavigate} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+// import App from "../App";
 
 // import { useEffect } from "react";
 
-const Login = () => {
+const Login = ({ setIsLoggedIn } : any) => {
 
   const navigate = useNavigate();
 
@@ -16,8 +17,8 @@ const Login = () => {
         email: email,
       },
     });
-    const cryptedPassword = await request.json();
-    return cryptedPassword[0].password;
+    const cryptedPassword = await request.json();    
+    return cryptedPassword;
   };
 
   async function comparePassword(
@@ -51,17 +52,18 @@ const Login = () => {
   // fetch à passer en useEffect?
   async function execOrder(data: any) {
     const dbPassword = await getPasswordFromDb(data.email);
-    // console.log(dbPassword);
-    const result = await comparePassword(data.password, dbPassword);    
+    const result = await comparePassword(data.password, dbPassword);  
+      
     if (result) {
       console.log("JE SUIS DANS LE IF RESULT")
       const token = await getToken(data.email)
       await Cookies.set('token', token, { secure: true });
-      
+      console.log(Cookies.get());
+      setIsLoggedIn(true)
+        navigate(-1);
     } else {
-      alert('wrong password')
+      alert('Wrong password')
     }
-    navigate(-1);
   }
 
   const { register, handleSubmit } = useForm();
@@ -93,11 +95,11 @@ const Login = () => {
             <button className="border py-4 px-8" type="submit">
               Se connecter
             </button>
-            <a href="/register">
+            <Link to="/register">
               <button className="border py-4 px-8" type="button">
                 Créer mon compte
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </form>

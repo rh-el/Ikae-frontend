@@ -1,11 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 
 interface Header {
   setFilter: (filter: string) => void;
+  isLoggedIn: boolean;
 }
 
-const Header = ({ setFilter }: Header) => {
+const Header = ({ setFilter, isLoggedIn }: Header) => {
   const navigate = useNavigate();
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
     const target = e.target as HTMLInputElement;
     if (e.key === "Enter") {
@@ -40,26 +43,21 @@ const Header = ({ setFilter }: Header) => {
   return (
     <>
       <div className="sticky z-10 top-0 w-full flex items-center justify-between px-4 py-2 bg-white shadow-md">
-        <a
-          className="self-start rounded-lg px-4 py-2 hover:text-slate-700 text-slate-700 font-medium"
-          href="/"
-        >
+        <Link to="/" className="self-start rounded-lg px-4 py-2 hover:text-slate-700 text-slate-700 font-medium">
           meublio.
-        </a>
+        </Link>
         {inputType}
         <div className="self-end rounded-lg px-3 py-2 text-slate-700 font-medium">
-          <a
-            className="self-end rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
-            href="/basket"
-          >
+          <Link to="/basket" className="self-end rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900">
             🛒
-          </a>
-          <a
-            className="self-end rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
-            href="/login"
-          >
-            👤
-          </a>
+          </Link>
+          {isLoggedIn ? (
+              <Link to="/dashboard" className="self-end rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900">👤</Link>
+            ) : (
+              <Link to="/login" className="self-end rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900">👤</Link>
+            )
+          }
+
         </div>
       </div>
     </>

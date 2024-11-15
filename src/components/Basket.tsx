@@ -26,24 +26,30 @@ function Basket () {
     // }
 
     const newOrder = async (productIds: number[], token: string) => {
+        const body = JSON.stringify({
+            token : token,
+            total_price : totalPrice,
+            products_id : productIds,
+        })  
+        
         const request = await fetch('http://192.168.5.181:3000/order', {
             method: "POST",
-            body: JSON.stringify({
-                token : token,
-                total_price : totalPrice,
-                product_id : productIds,
-            })
+            body: body,
+            headers: {
+                "Content-Type": "application/json",
+              },       
         })
-        console.log(request.json());
+        const data = await request.json()
+        console.log(data);
     }
 
     const completeOrder = async () => {
         const productIds = productList.map((product: any) => {
             return product.id
         })
-        console.log("🍑", productIds);
-        const token = Cookies.get('token')
-        console.log(token);
+        // console.log("🍑", productIds);
+        const token: any = Cookies.get('token')
+        // console.log(token);
         newOrder(productIds, token)
     }
 
@@ -77,7 +83,7 @@ function Basket () {
             </div>
             <div className="w-1/3">
                 <div className="flex flex-col gap-5 border border-grey p-6 w-full">
-                        <h2 className="font-bold">Résumé de votre commande</h2>
+                        <h2 className="font-bold">Récapitulatif de votre commande</h2>
                         {productList.map((product: any) => {
                             return (
                             <div key={product.id} className="flex gap-4" >

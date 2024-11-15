@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import bcrypt from "bcryptjs";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const hashPassword = (password: string) => {
   const salt = bcrypt.genSaltSync(10);
@@ -10,7 +10,8 @@ const hashPassword = (password: string) => {
 };
 
 const registerInDb = async (data: any, password: string) => {
-  await fetch(`http://192.168.5.181:3000/register`, {
+  try {
+    const response =  await fetch(`http://192.168.5.181:3000/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -23,13 +24,22 @@ const registerInDb = async (data: any, password: string) => {
       password: password,
     }),
   });
+  if (response.ok){
+    console.log("FETCH OKAY");
+    return true; 
+  }
+} catch (error){
+  console.log("FETCH PAS OKAY");
+  return false;
+}
 };
 
-const sendRegistrationForm = async (data: any, setter: any) => {
+const sendRegistrationForm = async (data: any, setterRegistration: any, setterError: any ) => {
   const hashedPassword = hashPassword(data.password);
-  await registerInDb(data, hashedPassword);
-  setter(true);
-};
+  const requete = await registerInDb(data, hashedPassword);
+  console.log("IN TRY")
+  requete ? setterRegistration(true) : setterError(true); 
+ }
 
 
 
@@ -37,8 +47,9 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [registrationStatus, setRegistrationStatus] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data: object) => sendRegistrationForm(data, setRegistrationStatus);
+  const onSubmit = (data: object) => sendRegistrationForm(data, setRegistrationStatus, setError);
   return (
     <>
     {!registrationStatus ? 
@@ -91,6 +102,7 @@ const Register = () => {
               Créer mon compte
             </button>
           </a>
+          {error && <p className="m-4">Vous avez déjà un compte ! Connectez-vous <Link to="/login" className="underline font-semibold">ici</Link>.</p>}
         </div>
       </form>
       : <div className="flex w-full flex-col items-center p-10 gap-90">
