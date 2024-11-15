@@ -91,7 +91,7 @@ const Register = () => {
             <div>
               <label htmlFor="password">Mot de passe : </label>
               <input
-                type="text"
+                type="password"
                 className="border w-full"
                 {...register("password")}
               ></input>

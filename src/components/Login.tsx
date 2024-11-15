@@ -70,40 +70,36 @@ const Login = ({ setIsLoggedIn } : any) => {
   const onSubmit = (data: any) => execOrder(data);
 
   return (
-    <>
+    <div className="flex flex-col justify-center h-screen p-20">
+      <h2 className="text-3xl text-center">Connectez-vous</h2>
       <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col items-center p-10">
           <div className="flex flex-col gap-4 w-3/4 pb-4">
             <div>
               <label htmlFor="email">Email : </label>
-              <input
-                type="text"
-                className="border w-full"
-                {...register("email")}
-              ></input>
+              <input type="text" className="border w-full" {...register("email")}></input>
             </div>
             <div>
               <label htmlFor="password">Mot de passe : </label>
-              <input
-                type="text"
-                className="border w-full"
-                {...register("password")}
-              ></input>
+              <input type="password" className="border w-full" {...register("password")}></input>
             </div>
           </div>
-          <div className="flex gap-4">
-            <button className="border py-4 px-8" type="submit">
+          <div className="flex flex-col gap-4">
+            <button className="border py-4 px-8  hover:bg-black hover:text-white duration-150 mt-2" type="submit">
               Se connecter
             </button>
-            <Link to="/register">
-              <button className="border py-4 px-8" type="button">
-                Créer mon compte
-              </button>
-            </Link>
           </div>
         </div>
       </form>
-    </>
+      <h2 className="text-3xl text-center mb-6">Vous n'avez pas de compte ?</h2>
+      <div className="flex justify-center">
+        <Link to="/register">
+          <button type="button" className="border py-4 px-8 bg-slate-950 text-white" >
+            Créer mon compte
+          </button>
+        </Link>
+      </div>
+    </div>
   );
 };
 

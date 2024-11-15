@@ -25,7 +25,7 @@ const Dashboard = ( {setIsLoggedIn} : any) => {
 
 
     return (
-        <div className="p-10 flex flex-col gap-4 items-center">
+        <div className="p-10 flex flex-col gap-4 items-center h-screen">
             {dashboardData?.map((product: Product) => (
                 <div key={product.id} className=" relative flex w-3/4 gap-4 border items-center rounded-xl ">
                     <div className="w-24 h-24 object-contain">
