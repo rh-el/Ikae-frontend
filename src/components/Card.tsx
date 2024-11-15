@@ -8,7 +8,6 @@ type Card = {
 };
 
 const Card = ({ id, image, product_name, price }: Card) => {
-  console.log(price);
 
   // if (price == XXXXX)
   // XXXXX,00
@@ -26,7 +25,6 @@ const Card = ({ id, image, product_name, price }: Card) => {
 
   function handleClickFromCard() {
     localStorage.setItem(id.toString(), JSON.stringify(productData));
-    console.log(localStorage);
   }
 
   return (

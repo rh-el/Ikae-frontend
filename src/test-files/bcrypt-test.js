@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
+const myPlaintextPassword = 's0//P4$$w0rD';
 const someOtherPlaintextPassword = 'not_bacon';
 
 let cryptedPassword = ""
@@ -30,10 +30,10 @@ function check() {
     console.log("result of compare: ", result);  
 });
 }
-
-// generate()
-// setTimeout(() => {
-//     check()}, 2000);
+// check()
+generate()
+setTimeout(() => {
+    check()}, 2000);
 
 
 

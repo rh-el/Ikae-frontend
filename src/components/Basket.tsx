@@ -10,16 +10,12 @@ function Basket () {
     for (const id in localStorage) {
         if (!isNaN(parseInt(id))) {
             productList.push(JSON.parse(localStorage[id]));
-            console.log("🌝", productList);
-            console.log("🌈", typeof(localStorage[id]));
         }
     }
 
     for (let i = 0; i < productList.length; i ++){
         totalPrice += productList[i].price;
-            console.log(totalPrice)
     }
-    console.log(totalPrice)
     
     // function removeItem(productId : string) {
     //     localStorage.removeItem(productId)
@@ -27,17 +23,24 @@ function Basket () {
     //     window.location.reload()
     // }
 
-    // function sumTotalPrice() {
-    //     const totalPrice = 1+1
-    //     return totalPrice
-    // }
+    function handleClickOrder() {
 
-    // function sumTotalPrice(...nums : any) {
-    //     let sum = nums.reduce((num1 : number, num2: number) => num1 + num2)
-    //     return sum
-    // }
+    }
 
-    // let totalPrice = sumTotalPrice()
+    // async function postOrder () {
+    //     await fetch(`http://192.168.5.181:3000/order`, {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //           token: ,
+    //           product_id: ,
+    //           total_price: ,
+    //         }),
+    //       });
+    // }
+    
 
     return (
         <div className="flex justify-between p-10">
@@ -64,7 +67,7 @@ function Basket () {
                         )}
                 </div>
             </div>
-            <div>
+            <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-5 border border-grey p-6">
                         <h2>Résumé de votre commande</h2>
 
@@ -81,6 +84,7 @@ function Basket () {
                         <p>Prix total : {totalPrice.toFixed(2).replace(".", ",")}€</p>
 
                 </div>
+                <button className="border rounded-xl px-4 py-2 w-full duration-100 hover:bg-slate-950 hover:text-white " onClick={handleClickOrder} >Passer la commande</button>
             </div>
         </div>
     )
