@@ -44,7 +44,7 @@ const Header = ({ setFilter, isLoggedIn }: Header) => {
   return (
     <>
       <div className="sticky z-10 top-0 w-full flex items-center justify-between px-4 py-2 bg-white shadow-md ">
-        <Link to="/" className="rounded-lg px-4 hover:text-slate-700 font-medium">
+        <Link to="/" className="rounded-lg px-4 hover:text-slate-700 text-lg ">
           meublio.
         </Link>
         {inputType}

@@ -5,6 +5,7 @@ import DropdownCategory from "./DropdownCategory";
 import DropdownMaterial from "./DropdownMaterial";
 import DropdownColor from "./DropdownColor";
 import DropdownState from "./DropdownState";
+import { Button } from "./ui/button";
 
 interface Product {
   id: number;
@@ -36,6 +37,7 @@ const Home = ({ filter }: Home) => {
     colors: [],
     states: []
   });  
+  const [ reset, setReset ] = useState(0)
 
   useEffect(() => {
     getAllProducts();
@@ -83,6 +85,14 @@ const Home = ({ filter }: Home) => {
       states
     }))
   }
+
+  const handleReset = () => {
+    handleCategoryChange([])
+    handleMaterialChange([])
+    handleColorChange([])
+    handleStateChange([])
+    setReset((prev) => prev + 1)
+  }
   
   // main logic for checking checked categories
   // for each attribute: return all product if none selected, or only matching products
@@ -102,10 +112,11 @@ const Home = ({ filter }: Home) => {
   return (
     <>
       <div className="flex justify-center gap-2">
-        <DropdownCategory handleCategoryChange={handleCategoryChange} />
-        <DropdownMaterial handleMaterialChange={handleMaterialChange} />
-        <DropdownColor handleColorChange={handleColorChange} />
-        <DropdownState handleStateChange={handleStateChange} />
+        <DropdownCategory key={`category-${reset}`} handleCategoryChange={handleCategoryChange} />
+        <DropdownMaterial key={`material-${reset}`} handleMaterialChange={handleMaterialChange} />
+        <DropdownColor key={`color-${reset}`} handleColorChange={handleColorChange} />
+        <DropdownState key={`state-${reset}`} handleStateChange={handleStateChange} />
+        <Button className="min-w-32 bg-white text-black border hover:bg-slate-100 " onClick={handleReset}>Réinitialiser</Button>
         {/* <Filter handleClick={handleClick} /> */}
       </div>
       <div className="grid justify-center items-center gap-x-2 gap-y-10 grid-cols-4 px-4 right-sift max-w-7xl ">

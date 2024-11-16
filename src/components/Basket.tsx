@@ -57,6 +57,7 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
         })
         const data = await request.json()
         setOrderData(data)
+        localStorage.clear()
         navigate("/confirmation");
     }
 

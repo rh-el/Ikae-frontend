@@ -560,6 +560,12 @@ video {
   src: url('../../public/assets/Nunito/Nunito-VariableFont-wght.ttf') format('tff');
 }
 
+@font-face {
+  font-family: "Domine";
+
+  src: url('../../public/assets/Nunito/public/assets/fonts/Domine/Domine-VariableFont_wght.ttf') format('tff');
+}
+
 :root {
   --radius: 0.5rem
   
@@ -688,6 +694,22 @@ video {
   margin-top: 0.5rem;
 }
 
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-40 {
+  margin-top: 10rem;
+}
+
+.mt-80 {
+  margin-top: 20rem;
+}
+
+.mt-96 {
+  margin-top: 24rem;
+}
+
 .flex {
   display: flex;
 }
@@ -757,12 +779,16 @@ video {
   height: 100vh;
 }
 
-.h-svh {
-  height: 100svh;
+.h-5\/6 {
+  height: 83.333333%;
 }
 
-.min-h-svh {
-  min-height: 100svh;
+.h-96 {
+  height: 24rem;
+}
+
+.h-svh {
+  height: 100svh;
 }
 
 .min-h-screen {
@@ -1040,6 +1066,11 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -1114,6 +1145,21 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -1146,6 +1192,14 @@ video {
   font-family: Nunito;
 }
 
+.font-domine {
+  font-family: Domine;
+}
+
+.font-news-cycle {
+  font-family: News_Cycle;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -1164,6 +1218,16 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
 .font-bold {
@@ -1210,6 +1274,11 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
 .underline {
@@ -1315,6 +1384,11 @@ html {
   background-color: rgb(15 23 42 / 0.9);
 }
 
+.hover\:bg-white:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
 .hover\:text-slate-700:hover {
   --tw-text-opacity: 1;
   color: rgb(51 65 85 / var(--tw-text-opacity));
@@ -1328,6 +1402,11 @@ html {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-black:hover {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .hover\:underline:hover {

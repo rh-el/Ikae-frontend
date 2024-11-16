@@ -6,6 +6,10 @@
     font-family: "Nunito";
     src: url('../../public/assets/Nunito/Nunito-VariableFont-wght.ttf') format('tff');
   }
+  @font-face {
+    font-family: "Domine";
+    src: url('../../public/assets/Nunito/public/assets/fonts/Domine/Domine-VariableFont_wght.ttf') format('tff');
+  }
   :root {
     --radius: 0.5rem
   }

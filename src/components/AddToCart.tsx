@@ -2,7 +2,7 @@ import { Button } from "./ui/button";
 
 function AddToCart({ handleClickFromCart, isInCart} : any) {
 
-    const dynamicClasses = isInCart ? "bg-slate-900 text-white" : "bg-white text-black hover:bg-slate-100"
+    const dynamicClasses = isInCart ? "bg-white text-black hover:bg-slate-100" : "bg-slate-900 text-white" 
     
 
     return (

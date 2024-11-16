@@ -2,7 +2,7 @@ const Footer = () => {
 
 
     return (
-        <p className="text-center w-full absolute bottom-0">© {(new Date()).getFullYear()} Meublio</p>
+        <p className="text-center w-full bottom-0">© {(new Date()).getFullYear()} Meublio</p>
     )
 }
 
