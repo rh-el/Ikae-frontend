@@ -17,6 +17,7 @@ function Product () {
     const [ productData, setProductData ] = useState<any>()
     const [ isInCart, setIsInCart ] = useState<boolean>(false)    
   
+    
     const formattedProductData = {
         id: productData?.[0].id, 
         image: productData?.[0].image_links[0], 
@@ -37,11 +38,17 @@ function Product () {
         const request = await fetch(`http://localhost:3000/product/${productId}`)
         const fetchProductData = await request.json()
         setProductData(fetchProductData)
+        return fetchProductData[0].id
     }
 
     useEffect(() => {
-        getProductInfo()
-        setIsInCart(localStorage.getItem(productData?.[0].id.toString()) ? true : false)
+        const initializeProduct = async () => {
+            const fetchedId = await getProductInfo()
+            if (fetchedId) {
+                setIsInCart(localStorage.getItem(fetchedId.toString()) ? true : false)
+            }
+        }
+        initializeProduct()
     }, [])
 
     function capitalizeFirstLetter(val: string) {

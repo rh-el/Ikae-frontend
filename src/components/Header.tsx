@@ -50,10 +50,10 @@ const Header = ({ setFilter, isLoggedIn }: Header) => {
         {inputType}
         <div className="px-3 py-2 text-slate-700 font-medium flex ">
           <Link to="/basket" className="self-end rounded-lg px-3 py-2  hover:bg-slate-100">
-            <img src="public/assets/img/panier.png" className="w-6" alt="" />
+            <img src="../../public/assets/img/panier.png" className="w-6" alt="" />
           </Link>
           <Link to={redirection} className="self-end rounded-lg px-3 py-2 hover:bg-slate-100">
-          <img src="public/assets/img/profile.png" className="w-6" alt="" />
+          <img src="../../public/assets/img/profile.png" className="w-6" alt="" />
           </Link>
 
         </div>
