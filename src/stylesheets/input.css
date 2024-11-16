@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer base {
+  @font-face {
+    font-family: "Nunito";
+    src: url('../../public/assets/Nunito/Nunito-VariableFont-wght.ttf') format('tff');
+  }
+  :root {
+    --radius: 0.5rem
+  }
+
+}
+
+
+html {
+  scrollbar-gutter: stable;
+}

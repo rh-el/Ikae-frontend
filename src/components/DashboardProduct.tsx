@@ -14,7 +14,7 @@ const DashboardProduct = () => {
     const [ type, setType ] = useState<string>('')
 
     const fetchFunction = async () => {
-        const request = await fetch(`http://192.168.5.181:3000/product/${productId}`)
+        const request = await fetch(`http://localhost:3000/product/${productId}`)
         const fetchProductData = await request.json()
         setDashboardProductData(fetchProductData)
         setProductName(fetchProductData[0].product_name)

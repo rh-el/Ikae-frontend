@@ -13,7 +13,7 @@ const Dashboard = ( {setIsLoggedIn} : any) => {
     const [dashboardData, setDashboardData] = useState<[]>([])
 
     const fetchFunction = async () => {
-        const request = await fetch("http://192.168.5.181:3000/home");
+        const request = await fetch("http://localhost:3000/home");
         const fetchData = await request.json();
         setDashboardData(fetchData)
       };
@@ -25,7 +25,7 @@ const Dashboard = ( {setIsLoggedIn} : any) => {
 
 
     return (
-        <div className="p-10 flex flex-col gap-4 items-center h-screen">
+        <div className="p-10 w-full flex flex-col gap-4 items-center h-screen">
             {dashboardData?.map((product: Product) => (
                 <div key={product.id} className=" relative flex w-3/4 gap-4 border items-center rounded-xl ">
                     <div className="w-24 h-24 object-contain">
@@ -40,7 +40,7 @@ const Dashboard = ( {setIsLoggedIn} : any) => {
                 </div>
             ))}
             <Link to={'/login'}>
-                <button onClick={() => setIsLoggedIn(false)} className="border p-4 rounded-md bg-red-200">Déconnexion</button>
+                <button onClick={() => setIsLoggedIn(false)} className="border p-4 rounded-md bg-slate-900 text-white mb-10">Déconnexion</button>
             </Link>
         </div>
     )

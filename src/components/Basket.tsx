@@ -1,30 +1,44 @@
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
+import { Button } from "./ui/button";
+import { useEffect, useState } from "react";
 
+type Basket = {
+    id: number;
+    price: number;
+    product_name: string;
+    image: string;
+}
 
-function Basket ({ setOrderData } : any) {
+function Basket ({ setOrderData, isLoggedIn } : any) {
 
-    // const [ basketContent, setBasketContent ] = useState()
+    const [ basketContent, setBasketContent ] = useState<Basket[]>([])
     const navigate = useNavigate()
-    const productList:any = []
     let totalPrice:GLfloat = 0;
 
-    for (const id in localStorage) {
-        if (!isNaN(parseInt(id))) {
-            productList.push(JSON.parse(localStorage[id]));
-        }
+    for (let i = 0; i < basketContent.length; i++){
+        totalPrice += basketContent[i].price;
     }
 
-    for (let i = 0; i < productList.length; i ++){
-        totalPrice += productList[i].price;
+    useEffect(() => {
+        const productList: Basket[] = [];
+        for (const id in localStorage) {
+            if (!isNaN(parseInt(id))) {
+                productList.push(JSON.parse(localStorage[id]));
+            }
+        }
+        setBasketContent(productList)
+        
+        
+    }, [])
+
+    function removeItem(productId : string) {
+        localStorage.removeItem(productId)
+        setBasketContent(prevContent => 
+            prevContent.filter(product => product.id.toString() !== productId)
+        );
     }
-    
-    // function removeItem(productId : string) {
-    //     localStorage.removeItem(productId)
-    //     console.log("📍", productId)
-    //     window.location.reload()
-    // }
 
     const newOrder = async (productIds: number[], token: string) => {
         const body = JSON.stringify({
@@ -33,7 +47,8 @@ function Basket ({ setOrderData } : any) {
             products_id : productIds,
         })  
         
-        const request = await fetch('http://192.168.5.181:3000/order', {
+        
+        const request = await fetch('http://localhost:3000/order', {
             method: "POST",
             body: body,
             headers: {
@@ -46,12 +61,15 @@ function Basket ({ setOrderData } : any) {
     }
 
     const completeOrder = async () => {
-        const productIds = productList.map((product: any) => {
+        const token: any = Cookies.get('token')
+        if (!isLoggedIn) {
+            navigate("/login");
+            return
+        }
+        const productIds = basketContent.map((product: any) => {
             return product.id
         })
-        // console.log("🍑", productIds);
-        const token: any = Cookies.get('token')
-        // console.log(token);
+
         newOrder(productIds, token)
     }
 
@@ -59,51 +77,59 @@ function Basket ({ setOrderData } : any) {
     
 
     return (
-        <div className="flex justify-between p-10">
-            <div>
-                <h2 className="text-3xl mb-5">Panier</h2> 
-                <div className="flex flex-col gap-5">
-                        {productList.map((product: any) => {
-                            return (
-                            <div key={product.id} className="flex gap-4" >
-                                <Link to={`../product/${product.id}`}>
-                                <img src={product.image} alt="" className="max-w-32"/>
-                                </Link>
-                                <div>
-                                    <h3>{product.product_name}</h3>
-                                    <p>{product.price.toFixed(2).replace(".", ",")}€</p>
-                                    {/* <button onClick={() => removeItem(product.id)}>🗑️ Supprimer</button> */}
-                                     <button onClick={() => { 
-                                        localStorage.removeItem(product.id)
-                                        window.location.reload()
-                                     }}>Supprimer</button>
+        <div className="flex flex-col w-1/2 p-10 gap-5">
+            <h2 className="text-3xl">Panier</h2> 
+            <div className="flex justify-between gap-10">
+                <div className="w-1/2">
+                    <div className="flex flex-col gap-5">
+                            {basketContent.map((product: any) => {
+                                return (
+                                <div key={product.id} className="flex gap-4" >
+                                    <Link to={`../product/${product.id}`}>
+                                    <img src={product.image} alt="" className="max-w-32"/>
+                                    </Link>
+                                    <div className="flex justify-between flex-col w-1/3">
+                                        <div>
+                                            <h3>{product.product_name}</h3>
+                                            <p>{product.price.toFixed(2).replace(".", ",")}€</p>
+
+                                        </div>
+                                        <Button onClick={() => { 
+                                            removeItem(product.id.toString())
+                                            }}
+                                            className="bg-white text-black hover:bg-slate-100 w-full">
+                                            Supprimer
+                                        </Button>
+                                    </div>
                                 </div>
-                            </div>
+                                )}
                             )}
-                        )}
+                    </div>
+                </div>
+                <div className="flex w-96">
+                    <div className="flex flex-col gap-5 border border-grey p-6 h-fit w-full">
+                            <h2 className="font-bold">Récapitulatif de votre commande</h2>
+                            {basketContent.map((product: any) => {
+                                return (
+                                <div key={product.id} className="flex gap-4" >
+                                    <div className="flex justify-between w-full">
+                                        <h3>{product.product_name}</h3>
+                                        <p>{product.price.toFixed(2).replace(".", ",")}€</p>
+                                    </div>
+                                </div>
+                                )}
+                            )}
+                            <hr className="my-2 h-0.5 border-t-0 bg-black" />
+                            <div className="flex justify-between font-bold">
+                                <p>Prix total</p>
+                                <p>{totalPrice.toFixed(2).replace(".", ",")}€</p>
+                            </div>
+                            <Button onClick={completeOrder} className="px-2 py-6 w-full border border-black bg-black text-white duration-150">Commander</Button>
+                            {/* <button onClick={completeOrder} className="p-2 w-full border border-black bg-black text-white duration-150">Commander</button> */}
+                    </div>
                 </div>
             </div>
-            <div className="w-1/3">
-                <div className="flex flex-col gap-5 border border-grey p-6 w-full">
-                        <h2 className="font-bold">Récapitulatif de votre commande</h2>
-                        {productList.map((product: any) => {
-                            return (
-                            <div key={product.id} className="flex gap-4" >
-                                <div className="flex justify-between w-full">
-                                    <h3>{product.product_name}</h3>
-                                    <p>{product.price.toFixed(2).replace(".", ",")}€</p>
-                                </div>
-                            </div>
-                            )}
-                        )}
-                        <hr className="my-2 h-0.5 border-t-0 bg-black" />
-                        <div className="flex justify-between font-bold">
-                            <p>Prix total</p>
-                            <p>{totalPrice.toFixed(2).replace(".", ",")}€</p>
-                        </div>
-                        <button onClick={completeOrder} className="p-2 w-full border border-black bg-black text-white duration-150">Commander</button>
-                </div>
-            </div>
+
         </div>
     )
 }    

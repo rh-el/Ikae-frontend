@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import bcrypt from "bcryptjs";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 const hashPassword = (password: string) => {
   const salt = bcrypt.genSaltSync(10);
@@ -11,7 +12,7 @@ const hashPassword = (password: string) => {
 
 const registerInDb = async (data: any, password: string) => {
   try {
-    const response =  await fetch(`http://192.168.5.181:3000/register`, {
+    const response =  await fetch(`http://localhost:3000/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,6 +23,7 @@ const registerInDb = async (data: any, password: string) => {
       username: data.username,
       email: data.email,
       password: password,
+      super_user: false
     }),
   });
   if (response.ok){
@@ -50,17 +52,18 @@ const Register = () => {
   const [error, setError] = useState<boolean>(false);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: object) => sendRegistrationForm(data, setRegistrationStatus, setError);
+  
   return (
     <>
     {!registrationStatus ? 
       <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full flex-col items-center p-10">
-          <div className="flex flex-col gap-4 w-3/4 pb-4">
+          <div className="flex flex-col gap-4 w-full pb-8">
             <div>
               <label htmlFor="lastname">Nom : </label>
               <input
                 type="text"
-                className="border w-full"
+                className="border w-full outline-none px-4 py-2"
                 {...register("lastname")}
               ></input>
             </div>
@@ -68,7 +71,7 @@ const Register = () => {
               <label htmlFor="firstname">Prénom : </label>
               <input
                 type="text"
-                className="border w-full"
+                className="border w-full outline-none px-4 py-2"
                 {...register("firstname")}
               ></input>
             </div>
@@ -76,7 +79,7 @@ const Register = () => {
               <label htmlFor="username">Nom d'utilisateur : </label>
               <input
                 type="text"
-                className="border w-full"
+                className="border w-full outline-none px-4 py-2"
                 {...register("username")}
               ></input>
             </div>
@@ -84,7 +87,7 @@ const Register = () => {
               <label htmlFor="email">Email : </label>
               <input
                 type="text"
-                className="border w-full"
+                className="border w-full outline-none px-4 py-2"
                 {...register("email")}
               ></input>
             </div>
@@ -92,16 +95,17 @@ const Register = () => {
               <label htmlFor="password">Mot de passe : </label>
               <input
                 type="password"
-                className="border w-full"
+                className="border w-full outline-none px-4 py-2"
                 {...register("password")}
               ></input>
             </div>
           </div>
-          <a href="/register">
+            <Button className="w-full py-6" type="submit" >Créer mon compte</Button>
+          {/* <a href="/register">
             <button className="border py-4 px-8" type="submit">
               Créer mon compte
             </button>
-          </a>
+          </a> */}
           {error && <p className="m-4">Vous avez déjà un compte ! Connectez-vous <Link to="/login" className="underline font-semibold">ici</Link>.</p>}
         </div>
       </form>

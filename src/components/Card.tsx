@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AddToCart from "./addToCart";
+import AddToCart from "./AddToCart";
 
 type Card = {
+  key: number;
   id: number;
   image: string;
   product_name: string;
@@ -20,14 +21,24 @@ const Card = ({ id, image, product_name, price }: Card) => {
     price: price,
   };
 
+  useEffect(() => {
+    setIsInCart(localStorage.getItem(id.toString()) ? true : false)
+  }, [])
+
+
   const handleClickFromCart = () => {
-    localStorage.setItem(id.toString(), JSON.stringify(productData));    
+    if (isInCart) {
+      localStorage.removeItem(id.toString())
+    } else {
+      localStorage.setItem(id.toString(), JSON.stringify(productData));    
+    }
     setIsInCart(!isInCart)
   }
+  
 
 
   return (
-    <div className="mb-4">
+    <div className="flex flex-col gap-2">
       <Link to={`./product/${id}`}>
         <img src={image} alt="" className="mb-2" />
         <h2 className="font-semibold">{product_name}</h2>

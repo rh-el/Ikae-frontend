@@ -17,10 +17,11 @@ function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
   const [ orderData, setOrderData ] = useState<object>({})
 
-  console.log("state is:", isLoggedIn);
+  console.log(isLoggedIn);
+  
   
   return (
-    <>
+    <div className="w-full h-full flex flex-col justify-center items-center gap-4 ">
       <BrowserRouter>
         <Header setFilter={setFilter} isLoggedIn={isLoggedIn} />
         <Routes>
@@ -28,14 +29,14 @@ function App() {
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/basket" element={<Basket setOrderData={setOrderData} />} />
+          <Route path="/basket" element={<Basket setOrderData={setOrderData} isLoggedIn={isLoggedIn} />} />
           <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/dashboard/product/:id" element={<DashboardProduct />} />
           <Route path="/confirmation" element={<OrderConfirmation orderData={orderData} />} />
         </Routes>
         <Footer />
       </BrowserRouter>
-    </>
+      </div>
   );
 }
 
