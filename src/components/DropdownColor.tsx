@@ -60,8 +60,8 @@ function DropdownColor
   // count selected items
   const selectedCount = Object.values(checkedItems).filter(Boolean).length;
   const buttonLabel = selectedCount > 0 
-    ? `Couleurs (${selectedCount})` 
-    : "Couleurs";
+    ? `Couleur (${selectedCount}) ▾` 
+    : "Couleur ▾";
 
   return (
     <DropdownMenu modal={false}>

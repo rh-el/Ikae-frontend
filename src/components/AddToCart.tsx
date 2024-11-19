@@ -7,7 +7,7 @@ function AddToCart({ handleClickFromCart, isInCart} : any) {
 
     return (
         <>
-        <Button onClick={handleClickFromCart} className={dynamicClasses} >{isInCart ? "Ajouté" : "Ajouter au panier"}</Button>
+        <Button onClick={handleClickFromCart} className={dynamicClasses} >{isInCart ? "Retirer du panier" : "Ajouter au panier"}</Button>
         {/* <button onClick={handleClickFromCart} className="p-2 w-full border border-black hover:bg-black hover:text-white duration-150 mt-2 font-nunito ">{isInCart ? "Ajouté ✔️" : "Ajouter au panier"}</button> */}
         </>
     )

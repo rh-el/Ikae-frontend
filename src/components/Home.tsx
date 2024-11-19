@@ -110,16 +110,16 @@ const Home = ({ filter }: Home) => {
   };
 
   return (
-    <>
-      <div className="flex justify-center gap-2">
+    <div className="mb-4 min-h-[85vh]">
+      <div className="flex justify-center gap-2 pb-6">
         <DropdownCategory key={`category-${reset}`} handleCategoryChange={handleCategoryChange} />
         <DropdownMaterial key={`material-${reset}`} handleMaterialChange={handleMaterialChange} />
         <DropdownColor key={`color-${reset}`} handleColorChange={handleColorChange} />
         <DropdownState key={`state-${reset}`} handleStateChange={handleStateChange} />
-        <Button className="min-w-32 bg-white text-black border hover:bg-slate-100 " onClick={handleReset}>Réinitialiser</Button>
+        <Button className="min-w-32 bg-white text-black font-bold border hover:bg-slate-100 " onClick={handleReset}>Réinitialiser ↺</Button>
         {/* <Filter handleClick={handleClick} /> */}
       </div>
-      <div className="grid justify-center items-center gap-x-2 gap-y-10 grid-cols-4 px-4 right-sift max-w-7xl ">
+      <div className="grid justify-center items-center gap-x-4 gap-y-10 grid-cols-4 px-4 max-w-7xl ">
         {data
           ?.filter((product: Product) =>
             product.product_name.trim().toLowerCase().includes(filter) &&
@@ -138,7 +138,7 @@ const Home = ({ filter }: Home) => {
             />
           ))}
       </div>
-    </>
+    </div>
   );
 };
 

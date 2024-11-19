@@ -58,37 +58,44 @@ function Product () {
     const dynamicClasses = isInCart ? "bg-white text-black hover:bg-slate-100 min-w-40": "bg-slate-900 text-white min-w-40" 
 
     return (
-    <>
-    <div className='flex w-full justify-center py-10 px-4 gap-20'>
-        <div className="flex w-1/3 gap-8">
-                <Carousel opts={{loop: true}} className='"flex flex-col gap-4"'>
-                    <CarouselContent className='w-full'>
-                        {productData?.[0].image_links.map((image: string, index: number) => (
-                            <CarouselItem  key={index} className='basis-full'>
-                                <img src={image} className="" alt="" />
-                            </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious className='' />
-                    <CarouselNext />
-                </Carousel>
-            </div>
-            <div className='w-1/2 flex flex-col gap-8'>
-                <div className='flex flex-col gap-4'>
-                    <h2 className="text-4xl">{productData?.[0].product_name}</h2>
-                    <p>{productData?.[0].price.toFixed(2).replace(".", ",")}€</p>
-                    <p>{productData?.[0].description}</p>
-                    <p>Catégorie : {capitalizeFirstLetter(productData?.[0].type)}</p>
-                    <p>Matière : {capitalizeFirstLetter(productData?.[0].material)}</p>
-                    <p>État : {capitalizeFirstLetter(productData?.[0].state)}</p>
+    <div className='min-h-[85vh]'>
+        <div className='flex w-full justify-center items-center py-10 px-4 gap-20'>
+            <div className="flex w-1/3 gap-8">
+                    <Carousel opts={{loop: true}} className="flex flex-col gap-4">
+                        <CarouselContent className='w-full items-center'>
+                            {productData?.[0].image_links.map((image: string, index: number) => (
+                                <CarouselItem  key={index} className='basis-full'>
+                                    <img src={image} className="" alt="" />
+                                </CarouselItem>
+                            ))}
+                        </CarouselContent>
+                        <CarouselPrevious className='' />
+                        <CarouselNext />
+                    </Carousel>
                 </div>
-                <div>
-                    <Button className={dynamicClasses} onClick={handleClickFromCart}>{isInCart ? "Ajouté" : "Ajouter au panier"}</Button>
+                <div className='w-1/3 flex flex-col gap-8'>
+                    <div className='flex flex-col gap-4'>
+                        <div className='flex flex-col'>
+                            <h2 className="text-4xl mb-2">{productData?.[0].product_name}</h2>
+                            <p className="text-2xl">{productData?.[0].price.toFixed(2).replace(".", ",")}€</p>
+                        </div>
+                        <div className='leading-6'>
+                            <p className="font-bold mt-3">Description</p>
+                            <p>{productData?.[0].description}</p>
+                            <p className="font-bold mt-3">Catégorie</p>
+                            <p>{capitalizeFirstLetter(productData?.[0].type)}</p>
+                            <p className="font-bold mt-3">Matière</p>
+                            <p>{capitalizeFirstLetter(productData?.[0].material)}</p>
+                            <p className="font-bold mt-3">État</p>
+                            <p>{capitalizeFirstLetter(productData?.[0].state)}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <Button className={dynamicClasses} onClick={handleClickFromCart}>{isInCart ? "Retirer du panier" : "Ajouter au panier"}</Button>
+                    </div>
                 </div>
-            </div>
+        </div>
     </div>
-
-    </>
     )
 }
 

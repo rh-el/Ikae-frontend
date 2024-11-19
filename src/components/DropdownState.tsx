@@ -56,8 +56,8 @@ function DropdownState
   // count selected items
   const selectedCount = Object.values(checkedItems).filter(Boolean).length;
   const buttonLabel = selectedCount > 0 
-    ? `États (${selectedCount})` 
-    : "États";
+    ? `État (${selectedCount}) ▾` 
+    : "État ▾";
 
   return (
     <DropdownMenu modal={false}>

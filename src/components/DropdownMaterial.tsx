@@ -58,8 +58,8 @@ function DropdownMaterial
   // count selected items
   const selectedCount = Object.values(checkedItems).filter(Boolean).length;
   const buttonLabel = selectedCount > 0 
-    ? `Matières (${selectedCount})` 
-    : "Matières";
+    ? `Matière (${selectedCount}) ▾` 
+    : "Matière ▾";
 
   return (
     <DropdownMenu modal={false}>

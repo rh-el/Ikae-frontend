@@ -78,29 +78,30 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
     
 
     return (
-        <div className="flex flex-col w-1/2 p-10 gap-5">
+        <div className="flex flex-col w-3/4 p-10 gap-5 min-h-[85vh]">
             <h2 className="text-3xl">Panier</h2> 
             <div className="flex justify-between gap-10">
-                <div className="w-1/2">
+                <div className="w-3/5">
                     <div className="flex flex-col gap-5">
                             {basketContent.map((product: any) => {
                                 return (
-                                <div key={product.id} className="flex gap-4" >
+                                <div key={product.id} className="flex gap-4 border rounded-xl pr-4" >
                                     <Link to={`../product/${product.id}`}>
-                                    <img src={product.image} alt="" className="max-w-32"/>
+                                    <img src={product.image} alt="" className="max-w-32 rounded-l-xl"/>
                                     </Link>
-                                    <div className="flex justify-between flex-col w-1/3">
+                                    <div className="flex justify-between w-full py-4">
                                         <div>
-                                            <h3>{product.product_name}</h3>
+                                            <h3 className="font-semibold">{product.product_name}</h3>
                                             <p>{product.price.toFixed(2).replace(".", ",")}€</p>
-
                                         </div>
+                                        <div>
                                         <Button onClick={() => { 
                                             removeItem(product.id.toString())
                                             }}
-                                            className="bg-white text-black hover:bg-slate-100 w-full">
+                                            className="bg-white text-black hover:bg-slate-100">
                                             Supprimer
                                         </Button>
+                                        </div>
                                     </div>
                                 </div>
                                 )}
@@ -108,7 +109,7 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
                     </div>
                 </div>
                 <div className="flex w-96">
-                    <div className="flex flex-col gap-5 border border-grey p-6 h-fit w-full">
+                    <div className="flex flex-col gap-5 border rounded-xl p-6 h-fit w-full">
                             <h2 className="font-bold">Récapitulatif de votre commande</h2>
                             {basketContent.map((product: any) => {
                                 return (

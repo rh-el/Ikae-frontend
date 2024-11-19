@@ -71,40 +71,45 @@ const Login = ({ setIsLoggedIn } : any) => {
   const onSubmit = (data: any) => execOrder(data);
 
   return (
-    <div className="flex justify-around items-end w-1/2 h-full gap-10 py-10">
-      <div className="flex flex-col w-1/2 gap-4">
-        <h2 className="text-3xl text-center">Connectez-vous</h2>
-        <form className="flex gap-4" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex w-full flex-col items-center">
-            <div className="flex flex-col gap-4 w-full pb-8">
-              <div>
-                <label htmlFor="email">Email : </label>
-                <input type="text" className="border w-full outline-none px-4 py-2 " {...register("email")}></input>
+    <div className="flex justify-center w-2/3 gap-14 py-10 min-h-[85vh]">
+      <div className="flex justify-center w-full gap-14 py-10 h-1/2">
+        <div className="flex flex-col justify-center items-center w-1/2 gap-4 p-10 border rounded-xl">
+          <h2 className="text-3xl text-center mb-5">Connectez-vous</h2>
+          <form className="flex w-full gap-4" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex w-full flex-col items-center">
+              <div className="flex flex-col gap-4 w-full pb-8 mb-5">
+                <div>
+                  <label htmlFor="email">Email : </label>
+                  <input type="text" className="border w-full outline-none px-4 py-2 rounded-sm" {...register("email")}></input>
+                </div>
+                <div>
+                  <label htmlFor="password">Mot de passe : </label>
+                  <input type="password" className="border w-full outline-none px-4 py-2 rounded-sm" {...register("password")}></input>
+                </div>
               </div>
-              <div>
-                <label htmlFor="password">Mot de passe : </label>
-                <input type="password" className="border w-full outline-none px-4 py-2" {...register("password")}></input>
+              <div className="flex flex-col gap-4 w-2/3">
+                <Button className="w-full py-6" type="submit" >Se connecter</Button>
+                {/* <button className="border py-4 px-8  hover:bg-black hover:text-white duration-150 mt-2" type="submit"> */}
+                  {/* Se connecter
+                </button> */}
               </div>
             </div>
-            <div className="flex flex-col gap-4 w-full">
-              <Button className="w-full py-6" type="submit" >Se connecter</Button>
-              {/* <button className="border py-4 px-8  hover:bg-black hover:text-white duration-150 mt-2" type="submit"> */}
-                {/* Se connecter
-              </button> */}
-            </div>
+          </form>
+        </div>
+        <div className="flex flex-col justify-between items-center w-1/2 gap-4 p-10 border rounded-xl">
+          <h2 className="text-3xl text-center">Vous n'avez pas de compte ?</h2>
+          <div className="flex flex-col items-center text-center gap-4">
+            <img src="../../public/assets/img/profile.png" className="w-14" alt="" />
+            <p>Créez votre compte en quelques clics !</p>
           </div>
-        </form>
-      </div>
-      <div className="w-1/2">
-
-        <h2 className="text-3xl text-center mb-6">Vous n'avez pas de compte ?</h2>
-        <div className="flex justify-center w-full">
-          <Link className="w-full" to="/register">
-          <Button className="w-full py-6">Créer mon compte</Button>
-            {/* <button type="button" className="border py-4 px-8 bg-slate-950 text-white" >
-              Créer mon compte
-            </button> */}
-          </Link>
+          <div className="flex justify-center w-2/3">
+            <Link className="w-full" to="/register">
+            <Button className="w-full py-6">Créer mon compte</Button>
+              {/* <button type="button" className="border py-4 px-8 bg-slate-950 text-white" >
+                Créer mon compte
+              </button> */}
+            </Link>
+          </div>
         </div>
       </div>
     </div>

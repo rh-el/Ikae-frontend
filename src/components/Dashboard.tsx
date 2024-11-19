@@ -25,22 +25,26 @@ const Dashboard = ( {setIsLoggedIn} : any) => {
 
 
     return (
-        <div className="p-10 w-1/2 flex flex-col gap-4 items-center h-screen">
+        <div className="w-3/4 flex flex-col gap-4 items-center pt-10 min-h-[85vh]">
+            <h2 className="text-3xl mb-5">Modifier les produits</h2>
             {dashboardData?.map((product: Product) => (
-                <div key={product.id} className=" relative flex w-3/4 gap-4 border items-center rounded-xl ">
-                    <div className="w-24 h-24 object-contain">
-                        <img className="" src={product.image_links?.[0]} alt="" />
-
+                <div key={product.id} className="relative flex w-3/4 gap-4 border items-center rounded-xl">
+                    <div className="flex items-center w-24 h-24 object-contain">
+                        <img className="rounded-l-xl" src={product.image_links?.[0]} alt="" />
                     </div>
-                    <div className="flex flex-col gap-4 justify-center w-1/6 ">
-                        <h3>{product.product_name}</h3>
-                        <p>{product.price}€</p>
+                    <div className="flex flex-col justify-center w-3/4">
+                        <h3 className="font-semibold">{product.product_name}</h3>
+                        <p>{product.price.toFixed(2).replace(".", ",")}€</p>
                     </div>
-                    <Link className="absolute right-4 border h-1/2 p-4 rounded-xl text-center flex items-center" to={`./product/${product.id}`}>Modifier produit</Link>
+                    <div className="flex pr-6 gap-x-4">
+                        <Link className="hover:underline" to={`./product/${product.id}`}>Modifier</Link>
+                        <p className="text-slate-200">|</p>
+                        <Link className="hover:underline" to={`./product/${product.id}`}>🗑️</Link> 
+                    </div>
                 </div>
             ))}
             <Link to={'/login'}>
-                <button onClick={() => setIsLoggedIn(false)} className="border p-4 rounded-md bg-slate-900 text-white mb-10">Déconnexion</button>
+                <button onClick={() => setIsLoggedIn(false)} className="border py-4 px-10 rounded-md bg-slate-900 text-white m-10">Déconnexion</button>
             </Link>
         </div>
     )

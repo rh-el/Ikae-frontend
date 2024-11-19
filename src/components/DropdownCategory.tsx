@@ -62,8 +62,8 @@ function DropdownCategory
   // count selected items
   const selectedCount = Object.values(checkedItems).filter(Boolean).length;
   const buttonLabel = selectedCount > 0 
-    ? `Catégories (${selectedCount})` 
-    : "Catégories";
+    ? `Catégorie (${selectedCount}) ▾` 
+    : "Catégorie ▾";
 
   return (
     <DropdownMenu modal={false}>
