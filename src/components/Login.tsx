@@ -56,10 +56,8 @@ const Login = ({ setIsLoggedIn } : any) => {
     const result = await comparePassword(data.password, dbPassword);  
       
     if (result) {
-      console.log("JE SUIS DANS LE IF RESULT")
       const token = await getToken(data.email)
       await Cookies.set('token', token, { secure: true });
-      console.log(Cookies.get());
       setIsLoggedIn(true)
       navigate(-1);
     } else {

@@ -19,17 +19,17 @@ function Product () {
   
     
     const formattedProductData = {
-        id: productData?.[0].id, 
-        image: productData?.[0].image_links[0], 
-        product_name: productData?.[0].product_name, 
-        price: productData?.[0].price,
+        id: productData?.id, 
+        image: productData?.images[0], 
+        product_name: productData?.product_name, 
+        price: productData?.price,
     }
 
     const handleClickFromCart = () => {
       if (isInCart) {
-        localStorage.removeItem(productData?.[0].id)
+        localStorage.removeItem(productData?.id)
       } else {
-        localStorage.setItem(productData?.[0].id, JSON.stringify(formattedProductData));    
+        localStorage.setItem(productData?.id, JSON.stringify(formattedProductData));    
       }
       setIsInCart(!isInCart)
     }
@@ -37,8 +37,8 @@ function Product () {
     const getProductInfo = async () => {
         const request = await fetch(`http://localhost:3000/product/${productId}`)
         const fetchProductData = await request.json()
-        setProductData(fetchProductData)
-        return fetchProductData[0].id
+        setProductData(fetchProductData)        
+        return fetchProductData.id
     }
 
     useEffect(() => {
@@ -63,7 +63,7 @@ function Product () {
             <div className="flex w-1/3 gap-8">
                     <Carousel opts={{loop: true}} className="flex flex-col gap-4">
                         <CarouselContent className='w-full items-center'>
-                            {productData?.[0].image_links.map((image: string, index: number) => (
+                            {productData?.images.map((image: string, index: number) => (
                                 <CarouselItem  key={index} className='basis-full'>
                                     <img src={image} className="" alt="" />
                                 </CarouselItem>
@@ -76,18 +76,18 @@ function Product () {
                 <div className='w-1/3 flex flex-col gap-8'>
                     <div className='flex flex-col gap-4'>
                         <div className='flex flex-col'>
-                            <h2 className="text-4xl mb-2">{productData?.[0].product_name}</h2>
-                            <p className="text-2xl">{productData?.[0].price.toFixed(2).replace(".", ",")}€</p>
+                            <h2 className="text-4xl mb-2">{productData?.product_name}</h2>
+                            <p className="text-2xl">{productData?.price.toFixed(2).replace(".", ",")}€</p>
                         </div>
                         <div className='leading-6'>
                             <p className="font-bold mt-3">Description</p>
-                            <p>{productData?.[0].description}</p>
+                            <p>{productData?.description}</p>
                             <p className="font-bold mt-3">Catégorie</p>
-                            <p>{capitalizeFirstLetter(productData?.[0].type)}</p>
+                            <p>{capitalizeFirstLetter(productData?.type)}</p>
                             <p className="font-bold mt-3">Matière</p>
-                            <p>{capitalizeFirstLetter(productData?.[0].material)}</p>
+                            <p>{capitalizeFirstLetter(productData?.material)}</p>
                             <p className="font-bold mt-3">État</p>
-                            <p>{capitalizeFirstLetter(productData?.[0].state)}</p>
+                            <p>{capitalizeFirstLetter(productData?.state)}</p>
                         </div>
                     </div>
                     <div>

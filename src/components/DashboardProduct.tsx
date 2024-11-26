@@ -1,11 +1,27 @@
 import { useEffect, useState } from "react"
 import { createBrowserHistory } from "history";
 
+type Product = {
+    color: string;
+    created_at: string;
+    description: string;
+    id: number;
+    image_links: string[];
+    in_stock: number;
+    material: string;
+    price: number;
+    product_name: string;
+    state: string;
+    type: string;
+    updated_at: string;
+    user_id: number
+}
+
 const DashboardProduct = () => {
     const history = createBrowserHistory(); 
     const splitPathname = history.location.pathname.split('/')
     const productId = splitPathname[3]
-    const [ dashboardProductData, setDashboardProductData ] = useState<any>(null)
+    const [ dashboardProductData, setDashboardProductData ] = useState<Product[]>(null)
     const [ productName, setProductName ] = useState<string>("")
     const [ description, setDescription ] = useState<string>('')
     const [ material, setMaterial ] = useState<string>('')
@@ -25,6 +41,9 @@ const DashboardProduct = () => {
         setType(fetchProductData[0].type)
 
     }
+
+    console.log(dashboardProductData);
+    
 
     useEffect(() => {
         fetchFunction()

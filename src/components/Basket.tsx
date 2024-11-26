@@ -2,16 +2,30 @@ import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+
+type OrderData = {
+    order_id?: number;
+    user_email?: string;
+}
+
+type Product = {
+    id: number;
+    image: string;
+    price: number;
+    product_name: string
+}
 
 type Basket = {
     id: number;
     price: number;
     product_name: string;
     image: string;
+    setOrderData: Dispatch<SetStateAction<OrderData>>;
+    isLoggedIn: boolean;
 }
 
-function Basket ({ setOrderData, isLoggedIn } : any) {
+function Basket ({ setOrderData, isLoggedIn } : Basket) {
 
     const [ basketContent, setBasketContent ] = useState<Basket[]>([])
     const navigate = useNavigate()
@@ -29,7 +43,7 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
             }
         }
         setBasketContent(productList)
-        
+
         
     }, [])
 
@@ -61,13 +75,13 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
         navigate("/confirmation");
     }
 
-    const completeOrder = async () => {
-        const token: any = Cookies.get('token')
+    const completeOrder = () => {
+        const token = Cookies.get('token') as string
         if (!isLoggedIn) {
             navigate("/login");
             return
         }
-        const productIds = basketContent.map((product: any) => {
+        const productIds = basketContent.map((product: Product) => {
             return product.id
         })
 
@@ -83,7 +97,7 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
             <div className="flex justify-between gap-10">
                 <div className="w-3/5">
                     <div className="flex flex-col gap-5">
-                            {basketContent.map((product: any) => {
+                            {basketContent.map((product: Product) => {
                                 return (
                                 <div key={product.id} className="flex gap-4 border rounded-xl pr-4" >
                                     <Link to={`../product/${product.id}`}>
@@ -111,7 +125,7 @@ function Basket ({ setOrderData, isLoggedIn } : any) {
                 <div className="flex w-96">
                     <div className="flex flex-col gap-5 border rounded-xl p-6 h-fit w-full">
                             <h2 className="font-bold">Récapitulatif de votre commande</h2>
-                            {basketContent.map((product: any) => {
+                            {basketContent.map((product: Product) => {
                                 return (
                                 <div key={product.id} className="flex gap-4" >
                                     <div className="flex justify-between w-full">

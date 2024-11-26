@@ -44,7 +44,7 @@ const Card = ({ id, image, product_name, price }: Card) => {
         <h2 className="font-semibold">{product_name}</h2>
         <p>{price.toFixed(2).replace(".", ",")}€</p>
       </Link>
-      <AddToCart isInCart={isInCart} handleClickFromCart={handleClickFromCart} className="min-w-32" />
+      <AddToCart isInCart={isInCart} handleClickFromCart={handleClickFromCart}  />
     </div>
   );
 };

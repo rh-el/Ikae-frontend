@@ -12,12 +12,17 @@ import { useState } from "react";
 import DashboardProduct from "./components/DashboardProduct";
 import OrderConfirmation from "./components/OrderConfirmation";
 
+type orderData = {
+  order_id?: number;
+  user_email?: string
+}
+
 function App() {
   const [ filter, setFilter ] = useState<string>("");
   const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
-  const [ orderData, setOrderData ] = useState<object>({})
+  const [ orderData, setOrderData ] = useState<orderData>({})
 
-  console.log(isLoggedIn);
+  console.log(orderData);
   
   
   return (

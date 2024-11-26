@@ -11,7 +11,7 @@ interface Product {
   id: number;
   product_name: string;
   price: GLfloat;
-  image_links: string[];
+  images: string[];
   type: string;
   color: string;
   material: string;
@@ -49,6 +49,11 @@ const Home = ({ filter }: Home) => {
     const fetchData = await request.json();
     setData(fetchData);
   };
+
+  console.log(data);
+  
+
+  
 
   // handle category change
   // used in DropdownCategory component
@@ -134,7 +139,7 @@ const Home = ({ filter }: Home) => {
               id={product.id}
               product_name={product.product_name}
               price={product.price}
-              image={product.image_links?.[0]}
+              image={product.images?.[0]}
             />
           ))}
       </div>

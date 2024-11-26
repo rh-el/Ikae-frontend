@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface Product {
@@ -6,9 +6,13 @@ interface Product {
     product_name: string;
     price: number;
     image_links: string[];
-  }
+}
 
-const Dashboard = ( {setIsLoggedIn} : any) => {
+type Dashboard = {
+    setIsLoggedIn: Dispatch<SetStateAction<boolean>>
+}
+
+const Dashboard = ( { setIsLoggedIn } : Dashboard) => {
 
     const [dashboardData, setDashboardData] = useState<[]>([])
 
