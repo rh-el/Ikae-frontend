@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Cookies from 'js-cookie';
+
 
 interface Product {
     id: number;
@@ -20,13 +22,16 @@ const Dashboard = ( { setIsLoggedIn } : Dashboard) => {
         const request = await fetch("http://localhost:3000/home");
         const fetchData = await request.json();
         setDashboardData(fetchData)
-      };
+    };
 
-      useEffect(() => {
+    useEffect(() => {
         fetchFunction()
-      }, [])
+    }, [])
 
-
+    const disconnect = () => {
+        setIsLoggedIn(false)
+        Cookies.remove('token')
+    }
 
     return (
         <div className="w-3/4 flex flex-col gap-4 items-center pt-10 min-h-[85vh]">
@@ -48,7 +53,7 @@ const Dashboard = ( { setIsLoggedIn } : Dashboard) => {
                 </div>
             ))}
             <Link to={'/login'}>
-                <button onClick={() => setIsLoggedIn(false)} className="border py-4 px-10 rounded-md bg-slate-900 text-white m-10">Déconnexion</button>
+                <button onClick={disconnect} className="border py-4 px-10 rounded-md bg-slate-900 text-white m-10">Déconnexion</button>
             </Link>
         </div>
     )

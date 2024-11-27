@@ -1,72 +1,43 @@
 import { useForm } from "react-hook-form";
-import bcrypt from "bcryptjs";
 import Cookies from 'js-cookie';
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "./ui/button";
-// import App from "../App";
 
-// import { useEffect } from "react";
+type User = {
+  email: string,
+  password: string
+}
 
-const Login = ({ setIsLoggedIn } : any) => {
+const Login = ({ setIsLoggedIn } : { setIsLoggedIn: (value: boolean) => void }) => {
 
   const navigate = useNavigate();
 
-  const getPasswordFromDb = async (email: string) => {
-    const request = await fetch(`http://localhost:3000/login`, {
-      method: "GET",
-      headers: {
-        email: email,
-      },
-    });
-    const cryptedPassword = await request.json();    
-    return cryptedPassword;
-  };
-
-  async function comparePassword(
-    userPassword: string,
-    cryptedPasswordFromDb: string,
-
-  ): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      bcrypt.compare(userPassword, cryptedPasswordFromDb, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      })
-    });
-  }
-
-  async function getToken(email: string) {
-    const request = await fetch(`http://localhost:3000/token`, {
-      headers: {
-        'email': email,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-    });
-    const token = await request.json();    
-    return token;
-  }
-
   // fetch à passer en useEffect?
-  async function execOrder(data: any) {
-    const dbPassword = await getPasswordFromDb(data.email);
-    const result = await comparePassword(data.password, dbPassword);  
-      
-    if (result) {
-      const token = await getToken(data.email)
-      await Cookies.set('token', token, { secure: true });
+  async function login(data: User) {
+    // const dbPassword = await getPasswordFromDb(data.email);
+    // const result = await comparePassword(data.password, dbPassword);  
+    try {
+      const response =  await fetch(`http://localhost:3000/login`, {
+        headers: {
+          "Content-Type": "application/json",
+          "email": data.email,
+          "password": data.password
+        }
+      });
+      const loginData = await response.json()
+    
+      Cookies.set('token', loginData.token, { secure: true });
       setIsLoggedIn(true)
       navigate(-1);
-    } else {
-      alert('Wrong password')
-    }
+
+    } catch (error){
+      console.error('login error:', error)
+      return false;
   }
+  };
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data: any) => execOrder(data);
+  const onSubmit = (data: any) => login(data);
 
   return (
     <div className="flex justify-center w-2/3 gap-14 py-10 min-h-[85vh]">
@@ -87,9 +58,6 @@ const Login = ({ setIsLoggedIn } : any) => {
               </div>
               <div className="flex flex-col gap-4 w-2/3">
                 <Button className="w-full py-6" type="submit" >Se connecter</Button>
-                {/* <button className="border py-4 px-8  hover:bg-black hover:text-white duration-150 mt-2" type="submit"> */}
-                  {/* Se connecter
-                </button> */}
               </div>
             </div>
           </form>
@@ -103,9 +71,6 @@ const Login = ({ setIsLoggedIn } : any) => {
           <div className="flex justify-center w-2/3">
             <Link className="w-full" to="/register">
             <Button className="w-full py-6">Créer mon compte</Button>
-              {/* <button type="button" className="border py-4 px-8 bg-slate-950 text-white" >
-                Créer mon compte
-              </button> */}
             </Link>
           </div>
         </div>

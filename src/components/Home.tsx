@@ -50,11 +50,6 @@ const Home = ({ filter }: Home) => {
     setData(fetchData);
   };
 
-  console.log(data);
-  
-
-  
-
   // handle category change
   // used in DropdownCategory component
   const handleCategoryChange = (types: string[]) => {
@@ -81,6 +76,9 @@ const Home = ({ filter }: Home) => {
       colors
     }))
   }
+
+  // console.log(data?.filter((product: Product) => product.product_name.trim().toLowerCase().includes(filter)))
+  // console.log(filter)
 
     // handle color change
   // used in DropdownColor component

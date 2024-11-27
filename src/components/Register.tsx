@@ -1,49 +1,54 @@
 import { useForm } from "react-hook-form";
-import bcrypt from "bcryptjs";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "./ui/button";
+import Cookies from "js-cookie";
 
-const hashPassword = (password: string) => {
-  const salt = bcrypt.genSaltSync(10);
-  const hash = bcrypt.hashSync(password, salt);
-  return hash;
-};
+type RegistrationForm = {
+  firstname: string,
+  lastname: string,
+  username: string,
+  email: string,
+  password: string,
+  super_user: boolean
+}
 
-const registerInDb = async (data: any, password: string) => {
+const registerInDb = async (data: RegistrationForm) => {
   try {
     const response =  await fetch(`http://localhost:3000/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      firstname: data.firstname,
-      lastname: data.lastname,
-      username: data.username,
-      email: data.email,
-      password: password,
-      super_user: false
-    }),
-  });
-  if (response.ok){
-    console.log("FETCH OKAY");
-    return true; 
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        super_user: true
+      }),
+    });
+    const registerData = await response.json()
+  
+    if (response.ok){
+      Cookies.set('token', registerData.token)
+      return true; 
+    }
+
+    throw new Error(registerData.error)
+    
+  } catch (error){
+    console.log(error);
+    return false;
   }
-} catch (error){
-  console.log("FETCH PAS OKAY");
-  return false;
-}
 };
 
-const sendRegistrationForm = async (data: any, setterRegistration: any, setterError: any ) => {
-  const hashedPassword = hashPassword(data.password);
-  const requete = await registerInDb(data, hashedPassword);
-  console.log("IN TRY")
+const sendRegistrationForm = async (data: RegistrationForm, setterRegistration: Dispatch<SetStateAction<boolean>>, setterError: Dispatch<SetStateAction<boolean>> ) => {
+  const requete = await registerInDb(data);
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   requete ? setterRegistration(true) : setterError(true); 
  }
-
-
 
 const Register = () => {
   const navigate = useNavigate();
@@ -51,7 +56,7 @@ const Register = () => {
   const [registrationStatus, setRegistrationStatus] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data: object) => sendRegistrationForm(data, setRegistrationStatus, setError);
+  const onSubmit = (data: any) => sendRegistrationForm(data, setRegistrationStatus, setError);
   
   return (
     <div className="min-h-[85vh]">
@@ -102,11 +107,6 @@ const Register = () => {
               </div>
             </div>
               <Button className="w-2/3 py-6" type="submit" >Créer mon compte</Button>
-            {/* <a href="/register">
-              <button className="border py-4 px-8" type="submit">
-                Créer mon compte
-              </button>
-            </a> */}
             {error && <p className="m-4">Vous avez déjà un compte ! Connectez-vous <Link to="/login" className="underline font-semibold">ici</Link>.</p>}
           </div>
         </form>
