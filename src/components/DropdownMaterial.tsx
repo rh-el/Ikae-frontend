@@ -24,6 +24,10 @@ function DropdownMaterial
     steel: false,
     glass: false,
     fabric: false,
+    wool: false,
+    leather: false,
+    ceramics: false,
+    marble: false
   });
 
   // associate display values with values declared in db
@@ -33,6 +37,10 @@ function DropdownMaterial
     steel: { display: "Acier", value: "acier" },
     glass: { display: "Verre", value: "verre" },
     fabric: { display: "Tissu", value: "tissu" },
+    wool: { display: "Laine", value: "laine" },
+    leather: { display: "Cuir", value: "cuir" },
+    ceramics: { display: "Céramique", value: "céramique" },
+    marble: { display: "Marbre", value: "marbre" },
   };
 
   // manage check logic

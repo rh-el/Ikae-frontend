@@ -25,7 +25,7 @@ type Basket = {
     isLoggedIn: boolean;
 }
 
-function Basket ({ setOrderData, isLoggedIn } : Basket) {
+function Basket ({ setOrderData } : Basket) {
 
     const [ basketContent, setBasketContent ] = useState<Basket[]>([])
     const navigate = useNavigate()
@@ -56,9 +56,8 @@ function Basket ({ setOrderData, isLoggedIn } : Basket) {
 
     const newOrder = async (productIds: number[], token: string) => {
         const body = JSON.stringify({
-            token : token,
             total_price : totalPrice,
-            products_id : productIds,
+            products_ids : productIds,
         })  
         
         
@@ -67,8 +66,9 @@ function Basket ({ setOrderData, isLoggedIn } : Basket) {
             body: body,
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": token
               },       
-        })
+        })        
         const data = await request.json()
         setOrderData(data)
         localStorage.clear()
@@ -77,7 +77,7 @@ function Basket ({ setOrderData, isLoggedIn } : Basket) {
 
     const completeOrder = () => {
         const token = Cookies.get('token') as string
-        if (!isLoggedIn) {
+        if (!token) {
             navigate("/login");
             return
         }

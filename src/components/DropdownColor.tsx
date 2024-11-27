@@ -23,8 +23,11 @@ function DropdownColor
     brown: false,
     black: false,
     white: false,
-    red: false,
-    grey: false
+    grey: false,
+    gold: false,
+    green : false,
+    copper: false,
+    transparent: false
   });
 
   // associate display values with values declared in db
@@ -33,8 +36,11 @@ function DropdownColor
     brown: { display: "Marron", value: "marron" },
     black: { display: "Noir", value: "noir" },
     white: { display: "Blanc", value: "blanc" },
-    red: { display: "Rouge", value: "rouge" },
-    grey: { display: "Gris", value: "gris" }
+    grey: { display: "Gris", value: "gris" },
+    gold: { display: "Doré", value: "doré" },
+    green: { display: "Vert", value: "vert" },
+    copper: { display: "Cuivre", value: "cuivre" },
+    transparent: { display: "Transparent", value: "transparent" },
   };
 
   // manage check logic

@@ -22,10 +22,13 @@ function DropdownCategory
     sofa: false,
     chair: false,
     lamp: false,
-    closet: false,
     carpet: false,
     armchair: false,
-    table: false
+    table: false,
+    storage: false,
+    mirror: false,
+    desk: false,
+    decoration: false
   });
 
   // associate display values with values declared in db
@@ -33,10 +36,13 @@ function DropdownCategory
     sofa: { display: "Canapé", value: "canapé" },
     chair: { display: "Chaise", value: "chaise" },
     lamp: { display: "Lampe", value: "lampe" },
-    closet: { display: "Armoire", value: "armoire" },
     carpet: { display: "Tapis", value: "tapis" },
     armchair: { display: "Fauteuil", value: "fauteuil" },
-    table: { display: "Table", value: "table" }
+    table: { display: "Table", value: "table" },
+    storage: { display: "Rangement", value: "rangement" },
+    mirror: { display: "Miroir", value: "miroir" },
+    desk: { display: "Bureau", value: "bureau" },
+    decoration: { display: "Décoration", value: "décoration" }
   };
 
   // manage check logic

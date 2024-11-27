@@ -39,6 +39,9 @@ const Home = ({ filter }: Home) => {
   });  
   const [ reset, setReset ] = useState(0)
 
+  console.log(data);
+  
+
   useEffect(() => {
     getAllProducts();
   }, [filter]);

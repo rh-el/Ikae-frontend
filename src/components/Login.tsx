@@ -12,10 +12,7 @@ const Login = ({ setIsLoggedIn } : { setIsLoggedIn: (value: boolean) => void }) 
 
   const navigate = useNavigate();
 
-  // fetch à passer en useEffect?
   async function login(data: User) {
-    // const dbPassword = await getPasswordFromDb(data.email);
-    // const result = await comparePassword(data.password, dbPassword);  
     try {
       const response =  await fetch(`http://localhost:3000/login`, {
         headers: {

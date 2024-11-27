@@ -1,11 +1,12 @@
 import { useNavigate, Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 interface Header {
   setFilter: (filter: string) => void;
   isLoggedIn: boolean;
 }
 
-const Header = ({ setFilter, isLoggedIn }: Header) => {
+const Header = ({ setFilter }: Header) => {
   const navigate = useNavigate();
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -39,7 +40,7 @@ const Header = ({ setFilter, isLoggedIn }: Header) => {
       ></input>
     );
 
-  const redirection = isLoggedIn ? "/dashboard" : "/login"
+  const redirection = Cookies.get('token') ? "/dashboard" : "/login"
 
   return (
     <>
