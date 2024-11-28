@@ -28,13 +28,13 @@ function App() {
   return (
     <div className="relative w-full h-full flex flex-col justify-center items-center gap-4 ">
       <BrowserRouter>
-        <Header setFilter={setFilter} isLoggedIn={isLoggedIn} />
+        <Header setFilter={setFilter} />
         <Routes>
           <Route path="/" element={<Home filter={filter} />} />
           <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/basket" element={<Basket setOrderData={setOrderData} isLoggedIn={isLoggedIn} />} />
+          <Route path="/basket" element={<Basket setOrderData={setOrderData} />} />
           <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} />} />
           <Route path="/dashboard/product/:id" element={<DashboardProduct />} />
           <Route path="/confirmation" element={<OrderConfirmation orderData={orderData} />} />

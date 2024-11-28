@@ -7,7 +7,7 @@ interface Product {
     id: number;
     product_name: string;
     price: number;
-    image_links: string[];
+    images: string[];
 }
 
 type Dashboard = {
@@ -39,7 +39,7 @@ const Dashboard = ( { setIsLoggedIn } : Dashboard) => {
             {dashboardData?.map((product: Product) => (
                 <div key={product.id} className="relative flex w-3/4 gap-4 border items-center rounded-xl">
                     <div className="flex items-center w-24 h-24 object-contain">
-                        <img className="rounded-l-xl" src={product.image_links?.[0]} alt="" />
+                        <img className="rounded-l-xl" src={product.images[0]} alt="" />
                     </div>
                     <div className="flex flex-col justify-center w-3/4">
                         <h3 className="font-semibold">{product.product_name}</h3>

@@ -42,9 +42,7 @@ function Basket ({ setOrderData } : Basket) {
                 productList.push(JSON.parse(localStorage[id]));
             }
         }
-        setBasketContent(productList)
-
-        
+        setBasketContent(productList)        
     }, [])
 
     function removeItem(productId : string) {
@@ -59,7 +57,7 @@ function Basket ({ setOrderData } : Basket) {
             total_price : totalPrice,
             products_ids : productIds,
         })  
-        
+    
         
         const request = await fetch('http://localhost:3000/order', {
             method: "POST",
