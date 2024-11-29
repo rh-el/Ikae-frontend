@@ -53,7 +53,7 @@ const Header = ({ setFilter }: Header) => {
             <img src="./assets/img/panier.png" className="w-6" alt="" />
           </Link>
           <Link to={redirection} className="self-end rounded-lg px-3 py-2 hover:bg-secondary">
-          <img src="../../public/assets/img/profile.png" className="w-6" alt="" />
+          <img src="./assets/img/profile.png" className="w-6" alt="" />
           </Link>
 
         </div>

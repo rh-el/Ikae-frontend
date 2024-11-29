@@ -43,14 +43,12 @@ const DashboardProduct = () => {
     const { register, handleSubmit, setValue } = useForm()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const onSubmit = (data: any) => { 
-        console.log(data)
         sendUpdateForm(data)
         navigate(-1)
      }
 
     const sendUpdateForm = async (data: ModifyForm) => {
         const request = await modifyDb(data)
-        console.log(request)
     }
 
     const modifyDb = async (data: ModifyForm) => {
@@ -90,7 +88,6 @@ const DashboardProduct = () => {
 
     }
 
-    console.log(dashboardProductData);
     
 
     useEffect(() => {
@@ -106,7 +103,6 @@ const DashboardProduct = () => {
     // const handleFileSelect = (event) => {
     //     const file = event.target.files[0]
     //     setSelectedFile(file)
-    //     console.log("selected file: ", file);        
     // }
 
     // const handleUpload = async () => {
@@ -123,7 +119,6 @@ const DashboardProduct = () => {
     //                 body: formData
     //             })
     //         const data = await api.json()
-    //         console.log(data);
     //     } catch (error: any) {
     //         console.error('upload error:', error)
     //         setUploadStatus('error uploading file: ' + error.message)

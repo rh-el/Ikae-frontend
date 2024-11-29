@@ -39,7 +39,6 @@ const Home = ({ filter }: Home) => {
   });  
   const [ reset, setReset ] = useState(0)
 
-  console.log(data);
   
 
   useEffect(() => {
@@ -80,8 +79,6 @@ const Home = ({ filter }: Home) => {
     }))
   }
 
-  // console.log(data?.filter((product: Product) => product.product_name.trim().toLowerCase().includes(filter)))
-  // console.log(filter)
 
     // handle color change
   // used in DropdownColor component

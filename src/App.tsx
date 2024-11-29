@@ -21,7 +21,6 @@ function App() {
   const [ filter, setFilter ] = useState<string>("");
   const [ orderData, setOrderData ] = useState<orderData>({})
 
-  console.log(orderData);
   
   
   return (
