@@ -16,7 +16,7 @@ const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState<[]>([])
 
     const fetchFunction = async () => {
-        const request = await fetch("http://localhost:3000/home");
+        const request = await fetch("https://ikae-backend-supabase.vercel.app/home");
         const fetchData = await request.json();
         setDashboardData(fetchData)
     };

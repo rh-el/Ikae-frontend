@@ -14,7 +14,7 @@ const Login = () => {
 
   async function login(data: User) {
     try {
-      const response =  await fetch(`http://localhost:3000/login`, {
+      const response =  await fetch(`https://ikae-backend-supabase.vercel.app/login`, {
         headers: {
           "Content-Type": "application/json",
           "email": data.email,

@@ -62,7 +62,7 @@ function Basket ({ setOrderData } : Basket) {
         })  
     
         
-        const request = await fetch('http://localhost:3000/order', {
+        const request = await fetch('https://ikae-backend-supabase.vercel.app/order', {
             method: "POST",
             body: body,
             headers: {

@@ -15,7 +15,7 @@ type RegistrationForm = {
 
 const registerInDb = async (data: RegistrationForm) => {
   try {
-    const response =  await fetch(`http://localhost:3000/register`, {
+    const response =  await fetch(`https://ikae-backend-supabase.vercel.app/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

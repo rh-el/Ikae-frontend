@@ -35,7 +35,7 @@ function Product () {
     }
     
     const getProductInfo = async () => {
-        const request = await fetch(`http://localhost:3000/product/${productId}`)
+        const request = await fetch(`https://ikae-backend-supabase.vercel.app/product/${productId}`)
         const fetchProductData = await request.json()
         setProductData(fetchProductData)        
         return fetchProductData.id

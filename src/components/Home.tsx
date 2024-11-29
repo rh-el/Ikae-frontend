@@ -48,7 +48,7 @@ const Home = ({ filter }: Home) => {
 
   // fetch all products data
   const getAllProducts = async () => {
-    const request = await fetch("http://localhost:3000/home");
+    const request = await fetch("https://ikae-backend-supabase.vercel.app/home");
     const fetchData = await request.json();
     setData(fetchData);
   };

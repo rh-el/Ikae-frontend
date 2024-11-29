@@ -55,7 +55,7 @@ const DashboardProduct = () => {
 
     const modifyDb = async (data: ModifyForm) => {
         try {
-            const response = await fetch(`http://localhost:3000/dashboard/update-product/${productId}`, {
+            const response = await fetch(`https://ikae-backend-supabase.vercel.app/dashboard/update-product/${productId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -78,7 +78,7 @@ const DashboardProduct = () => {
     }
 
     const fetchFunction = async () => {
-        const request = await fetch(`http://localhost:3000/product/${productId}`)
+        const request = await fetch(`https://ikae-backend-supabase.vercel.app/product/${productId}`)
         const fetchProductData = await request.json()
         setDashboardProductData(fetchProductData)
         setProductName(fetchProductData.product_name)
