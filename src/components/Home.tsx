@@ -122,10 +122,10 @@ const Home = ({ filter }: Home) => {
         <DropdownMaterial key={`material-${reset}`} handleMaterialChange={handleMaterialChange} />
         <DropdownColor key={`color-${reset}`} handleColorChange={handleColorChange} />
         <DropdownState key={`state-${reset}`} handleStateChange={handleStateChange} />
-        <Button className="min-w-32 bg-white text-black font-bold border hover:bg-slate-100 " onClick={handleReset}>Réinitialiser ↺</Button>
+        <Button className="min-w-56 text-md h-12 bg-white text-black font-semibold border hover:bg-secondary shadow-md hover:shadow-none" onClick={handleReset}>Réinitialiser ↺</Button>
         {/* <Filter handleClick={handleClick} /> */}
       </div>
-      <div className="grid justify-center items-center gap-x-4 gap-y-10 grid-cols-4 px-4 max-w-7xl ">
+      <div className="grid justify-center items-center gap-x-2 gap-y-10 grid-cols-4 px-10 max-w-full ">
         {data
           ?.filter((product: Product) =>
             product.product_name.trim().toLowerCase().includes(filter) &&

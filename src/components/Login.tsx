@@ -8,7 +8,7 @@ type User = {
   password: string
 }
 
-const Login = ({ setIsLoggedIn } : { setIsLoggedIn: (value: boolean) => void }) => {
+const Login = () => {
 
   const navigate = useNavigate();
 
@@ -24,7 +24,6 @@ const Login = ({ setIsLoggedIn } : { setIsLoggedIn: (value: boolean) => void }) 
       const loginData = await response.json()
     
       Cookies.set('token', loginData.token, { secure: true });
-      setIsLoggedIn(true)
       navigate(-1);
 
     } catch (error){

@@ -41,7 +41,8 @@ const DashboardProduct = () => {
     const [ type, setType ] = useState<string>('')
     const navigate = useNavigate();
     const { register, handleSubmit, setValue } = useForm()
-    const onSubmit = (data: ModifyForm) => { 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const onSubmit = (data: any) => { 
         console.log(data)
         sendUpdateForm(data)
         navigate(-1)
@@ -175,7 +176,7 @@ const DashboardProduct = () => {
                     </div>
                 <div className="flex flex-col gap-4 my-6">
                     <button className="border rounded-lg py-4 px-8 bg-slate-950 text-white" type="submit">Modifier les informations</button>
-                    <button className="border rounded-lg py-4 px-8" type="submit">Supprimer le produit</button>
+                    {/* <button className="border rounded-lg py-4 px-8" type="submit">Supprimer le produit</button> */}
                 </div>
             </form>
         </>

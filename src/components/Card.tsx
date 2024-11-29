@@ -38,11 +38,14 @@ const Card = ({ id, image, product_name, price }: Card) => {
 
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 p-4 rounded-md hover:bg-slate-50 shadow-md hover:shadow-none duration-200">
       <Link to={`./product/${id}`}>
-        <img src={image} alt="" className="mb-2" />
-        <h2 className="font-semibold">{product_name}</h2>
-        <p>{price.toFixed(2).replace(".", ",")}€</p>
+        <img src={image} alt="" className="mb-2 rounded-lg" />
+        <div className="px-2 flex flex-col gap-4 my-4">
+          <h2 className="font-semibold text-2xl">{product_name}</h2>
+          <p className="font-semibold">{price.toFixed(2).replace(".", ",")}€</p>
+
+        </div>
       </Link>
       <AddToCart isInCart={isInCart} handleClickFromCart={handleClickFromCart}  />
     </div>

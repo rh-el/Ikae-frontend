@@ -19,7 +19,6 @@ type orderData = {
 
 function App() {
   const [ filter, setFilter ] = useState<string>("");
-  const [ isLoggedIn, setIsLoggedIn ] = useState<boolean>(false);
   const [ orderData, setOrderData ] = useState<orderData>({})
 
   console.log(orderData);
@@ -31,11 +30,11 @@ function App() {
         <Header setFilter={setFilter} />
         <Routes>
           <Route path="/" element={<Home filter={filter} />} />
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/basket" element={<Basket setOrderData={setOrderData} />} />
-          <Route path="/dashboard" element={<Dashboard setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/product/:id" element={<DashboardProduct />} />
           <Route path="/confirmation" element={<OrderConfirmation orderData={orderData} />} />
         </Routes>

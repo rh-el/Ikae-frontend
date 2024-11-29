@@ -17,17 +17,20 @@ type Product = {
 }
 
 type Basket = {
+    setOrderData: Dispatch<SetStateAction<OrderData>>;
+}
+
+type BasketContent = {
     id: number;
     price: number;
     product_name: string;
     image: string;
-    setOrderData: Dispatch<SetStateAction<OrderData>>;
     isLoggedIn: boolean;
 }
 
 function Basket ({ setOrderData } : Basket) {
 
-    const [ basketContent, setBasketContent ] = useState<Basket[]>([])
+    const [ basketContent, setBasketContent ] = useState<BasketContent[]>([])
     const navigate = useNavigate()
     let totalPrice:GLfloat = 0;
 
@@ -36,7 +39,7 @@ function Basket ({ setOrderData } : Basket) {
     }
 
     useEffect(() => {
-        const productList: Basket[] = [];
+        const productList: BasketContent[] = [];
         for (const id in localStorage) {
             if (!isNaN(parseInt(id))) {
                 productList.push(JSON.parse(localStorage[id]));

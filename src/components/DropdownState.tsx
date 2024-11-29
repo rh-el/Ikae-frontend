@@ -34,7 +34,7 @@ function DropdownState
   };
 
   // manage check logic
-  const handleCheckedChange = (key: string, checked: boolean) => {
+  const handleCheckedChange = (key: keyof typeof itemsMap, checked: boolean) => {
     // update checkedItems state with new checked item
     const newCheckedItems = {
       ...checkedItems,
@@ -48,7 +48,7 @@ function DropdownState
     // keep only truthy item
       .filter(([_, isChecked]) => isChecked)
     // get db exact name for each checked item
-      .map(([key]) => itemsMap[key].value);
+      .map(([key]) => itemsMap[key as keyof typeof itemsMap].value);
     // update category wuth new selected items
     handleStateChange(selectedStates);
   };
@@ -62,7 +62,7 @@ function DropdownState
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button className="min-w-32" variant="outline">{buttonLabel}</Button>
+        <Button className="min-w-56 text-md h-12 shadow-md hover:shadow-none hover:bg-secondary" variant="outline">{buttonLabel}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         {/* generate a selector for each item in itemsMap */}
@@ -70,7 +70,8 @@ function DropdownState
           <DropdownMenuCheckboxItem
             key={key}
             checked={checkedItems[key]}
-            onCheckedChange={(checked) => handleCheckedChange(key, checked as boolean)}
+            onCheckedChange={(checked) => handleCheckedChange(key as keyof typeof itemsMap, checked as boolean)}
+            className="text-md focus:bg-secondary"
           >
             {display}
           </DropdownMenuCheckboxItem>

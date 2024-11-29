@@ -9,7 +9,11 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-		colors: {}
+		colors: {
+			'primary': '#33363D',
+			'customwhite': '#F7F7F7',
+			'secondary': '#B9E9E1'
+		}
   	},
 	fontFamily: {
 		'nunito': ["Nunito"],

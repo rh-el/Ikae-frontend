@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from 'js-cookie';
 
@@ -10,11 +10,8 @@ interface Product {
     images: string[];
 }
 
-type Dashboard = {
-    setIsLoggedIn: Dispatch<SetStateAction<boolean>>
-}
 
-const Dashboard = ( { setIsLoggedIn } : Dashboard) => {
+const Dashboard = () => {
 
     const [dashboardData, setDashboardData] = useState<[]>([])
 
@@ -29,7 +26,6 @@ const Dashboard = ( { setIsLoggedIn } : Dashboard) => {
     }, [])
 
     const disconnect = () => {
-        setIsLoggedIn(false)
         Cookies.remove('token')
     }
 
@@ -47,8 +43,6 @@ const Dashboard = ( { setIsLoggedIn } : Dashboard) => {
                     </div>
                     <div className="flex pr-6 gap-x-4">
                         <Link className="hover:underline" to={`./product/${product.id}`}>Modifier</Link>
-                        <p className="text-slate-200">|</p>
-                        <Link className="hover:underline" to={`./product/${product.id}`}>🗑️</Link> 
                     </div>
                 </div>
             ))}
