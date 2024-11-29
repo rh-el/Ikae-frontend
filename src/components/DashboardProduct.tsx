@@ -48,7 +48,7 @@ const DashboardProduct = () => {
      }
 
     const sendUpdateForm = async (data: ModifyForm) => {
-        const request = await modifyDb(data)
+        await modifyDb(data)
     }
 
     const modifyDb = async (data: ModifyForm) => {
