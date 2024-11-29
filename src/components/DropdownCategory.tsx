@@ -76,7 +76,7 @@ function DropdownCategory
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
-        <Button className="min-w-56 text-md h-12 shadow-md hover:shadow-none hover:bg-secondary" variant="outline">{buttonLabel}</Button>
+        <Button className="min-w-56 text-md h-12 shadow-md hover:shadow-none hover:bg-primary hover:text-white" variant="outline">{buttonLabel}</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         {/* generate a selector for each item in itemsMap */}
@@ -85,7 +85,7 @@ function DropdownCategory
             key={key}
             checked={checkedItems[key]}
             onCheckedChange={(checked) => handleCheckedChange(key as keyof typeof itemsMap, checked as boolean)}
-            className="text-md focus:bg-secondary"
+            className="text-md focus:bg-primary focus:text-white"
           >
             {display}
           </DropdownMenuCheckboxItem>

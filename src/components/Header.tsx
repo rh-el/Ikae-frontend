@@ -49,10 +49,10 @@ const Header = ({ setFilter }: Header) => {
         </Link>
         {inputType}
         <div className="px-3 py-2 text-slate-700 font-medium flex ">
-          <Link to="/basket" className="self-end rounded-lg px-3 py-2  hover:bg-secondary">
+          <Link to="/basket" className="self-end rounded-lg px-3 py-2  hover:bg-slate-100">
             <img src="./assets/img/panier.png" className="w-6" alt="" />
           </Link>
-          <Link to={redirection} className="self-end rounded-lg px-3 py-2 hover:bg-secondary">
+          <Link to={redirection} className="self-end rounded-lg px-3 py-2 hover:bg-slate-100">
           <img src="./assets/img/profile.png" className="w-6" alt="" />
           </Link>
 

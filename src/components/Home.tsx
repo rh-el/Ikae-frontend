@@ -119,7 +119,7 @@ const Home = ({ filter }: Home) => {
         <DropdownMaterial key={`material-${reset}`} handleMaterialChange={handleMaterialChange} />
         <DropdownColor key={`color-${reset}`} handleColorChange={handleColorChange} />
         <DropdownState key={`state-${reset}`} handleStateChange={handleStateChange} />
-        <Button className="min-w-56 text-md h-12 bg-white text-black font-semibold border hover:bg-secondary shadow-md hover:shadow-none" onClick={handleReset}>Réinitialiser ↺</Button>
+        <Button className="min-w-56 text-md h-12 bg-white text-black font-semibold border hover:bg-primary hover:text-white shadow-md hover:shadow-none" onClick={handleReset}>Réinitialiser ↺</Button>
         {/* <Filter handleClick={handleClick} /> */}
       </div>
       <div className="grid justify-center items-center gap-x-2 gap-y-10 grid-cols-4 px-10 max-w-full ">
