@@ -14,14 +14,20 @@ const Login = () => {
 
   async function login(data: User) {
     try {
+      const token = Cookies.get('token') ? Cookies.get('token') : null
       const response =  await fetch(`https://ikae-backend-supabase.vercel.app/login`, {
         headers: {
           "Content-Type": "application/json",
           "email": data.email,
-          "password": data.password
+          "password": data.password,
+          Authorization: `Bearer ${token}` 
         }
       });
       const loginData = await response.json()
+
+      if (loginData.error) {
+        throw new Error(loginData.error)
+      }
     
       Cookies.set('token', loginData.token, { secure: true });
       navigate(-1);
