@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import Cookies from 'js-cookie';
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 type User = {
   email: string,
@@ -10,12 +11,14 @@ type User = {
 
 const Login = () => {
 
+  const [ loginError, setLoginError ] = useState<boolean>(false)
+
   const navigate = useNavigate();
 
   async function login(data: User) {
     try {
       const token = Cookies.get('token') ? Cookies.get('token') : null
-      const response =  await fetch(`https://ikae-backend-supabase.vercel.app/login`, {
+      const response =  await fetch(`http://localhost:3000/login`, {
         headers: {
           "Content-Type": "application/json",
           "email": data.email,
@@ -26,9 +29,11 @@ const Login = () => {
       const loginData = await response.json()
 
       if (loginData.error) {
+        setLoginError(true)
         throw new Error(loginData.error)
       }
-    
+      
+      setLoginError(false)
       Cookies.set('token', loginData.token, { secure: true });
       navigate(-1);
 
@@ -48,7 +53,7 @@ const Login = () => {
           <h2 className="text-3xl text-center mb-5">Connectez-vous</h2>
           <form className="flex w-full gap-4" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex w-full flex-col items-center">
-              <div className="flex flex-col gap-4 w-full pb-8 mb-5">
+              <div className="flex flex-col gap-4 w-full pb-8">
                 <div>
                   <label htmlFor="email">Email : </label>
                   <input type="text" className="border w-full outline-none px-4 py-2 rounded-sm" {...register("email")}></input>
@@ -57,6 +62,8 @@ const Login = () => {
                   <label htmlFor="password">Mot de passe : </label>
                   <input type="password" className="border w-full outline-none px-4 py-2 rounded-sm" {...register("password")}></input>
                 </div>
+              {loginError && 
+              <p className="text-center">Identifiants non reconnus</p> }
               </div>
               <div className="flex flex-col gap-4 w-2/3">
                 <Button className="w-full py-6" type="submit" >Se connecter</Button>
@@ -67,7 +74,7 @@ const Login = () => {
         <div className="flex flex-col justify-between items-center w-1/2 gap-4 p-10 border rounded-xl">
           <h2 className="text-3xl text-center">Vous n'avez pas de compte ?</h2>
           <div className="flex flex-col items-center text-center gap-4">
-            <img src="../../public/assets/img/profile.png" className="w-14" alt="" />
+            <img src="./public/assets/img/profile.png" className="w-14" alt="" />
             <p>Créez votre compte en quelques clics !</p>
           </div>
           <div className="flex justify-center w-2/3">

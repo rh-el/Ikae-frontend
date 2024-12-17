@@ -39,6 +39,7 @@ const Header = ({ setFilter }: Header) => {
       ></input>
     );
 
+  
   const redirection = Cookies.get('token') ? "/dashboard" : "/login"
 
   return (
