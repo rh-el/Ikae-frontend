@@ -74,7 +74,7 @@ const Login = () => {
         <div className="flex flex-col justify-between items-center w-1/2 gap-4 p-10 border rounded-xl">
           <h2 className="text-3xl text-center">Vous n'avez pas de compte ?</h2>
           <div className="flex flex-col items-center text-center gap-4">
-            <img src="./public/assets/img/profile.png" className="w-14" alt="" />
+            <img src="/assets/img/profile.png" className="w-14" alt="" />
             <p>Créez votre compte en quelques clics !</p>
           </div>
           <div className="flex justify-center w-2/3">
