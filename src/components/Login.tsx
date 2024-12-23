@@ -18,7 +18,7 @@ const Login = () => {
   async function login(data: User) {
     try {
       const token = Cookies.get('token') ? Cookies.get('token') : null
-      const response =  await fetch(`http://localhost:3000/login`, {
+      const response =  await fetch(`https://ikae-backend-supabase.vercel.app/login`, {
         headers: {
           "Content-Type": "application/json",
           "email": data.email,
@@ -29,7 +29,6 @@ const Login = () => {
       const loginData = await response.json()
 
       if (loginData.error) {
-        setLoginError(true)
         throw new Error(loginData.error)
       }
       
@@ -38,6 +37,8 @@ const Login = () => {
       navigate(-1);
 
     } catch (error){
+      setLoginError(true)
+
       console.error('login error:', error)
       return false;
   }
