@@ -141,7 +141,7 @@ function Basket ({ setOrderData } : Basket) {
                                 <p>Prix total</p>
                                 <p>{totalPrice.toFixed(2).replace(".", ",")}€</p>
                             </div>
-                            <Button onClick={completeOrder} className="px-2 py-6 w-full border border-black bg-black text-white duration-150">Commander</Button>
+                            <Button onClick={completeOrder} className="px-2 py-6 w-full border border-black bg-primary text-white duration-150 hover:bg-primary/50">Commander</Button>
                             {/* <button onClick={completeOrder} className="p-2 w-full border border-black bg-black text-white duration-150">Commander</button> */}
                     </div>
                 </div>

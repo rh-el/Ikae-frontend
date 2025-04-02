@@ -55,7 +55,7 @@ function Product () {
         return String(val).charAt(0).toUpperCase() + String(val).slice(1);
     }
 
-    const dynamicClasses = isInCart ? "bg-white border border-black text-black hover:border-none hover:bg-slate-100 min-w-40": "bg-slate-900 text-white min-w-40 hover:bg-white hover:border border-2 border-black hover:text-black" 
+    const dynamicClasses = isInCart ? "bg-white border border-black text-black hover:border-none hover:bg-slate-100 min-w-40": "bg-primary text-white min-w-40 hover:bg-white hover:border border-black hover:text-black" 
 
     return (
     <div className='min-h-[85vh]'>
